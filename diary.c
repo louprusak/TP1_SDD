@@ -21,6 +21,31 @@
 //     }
 // }
 
+void initDiary(char *fileName){
+    char ligne[100];
+    char year[5], week[3], hour[3], text[10];
+    int day = 0;
+    FILE* flot = fopen(fileName, "r");
+    if(flot){
+        while(fgets(ligne,100,flot)){
+
+            
+
+            strcpy(year,recupYear(ligne));
+            strcpy(week,recupWeek(ligne));
+            day = recupDay(ligne);
+            strcpy(hour,recupHour(ligne));
+            strcpy(text,recupText(ligne));
+        }
+    }
+}
+
+
+
+
+void readLine(FILE* flot){
+    
+}
 
 //Initialisation de la liste des semaines (Agenda)
 Diary initWeeks(void){
