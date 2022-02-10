@@ -31,12 +31,15 @@ typedef struct week{
 /*---------------------------------------------------------------*/
 typedef enum {TRUE, FALSE} Boolean;
 
-
+Diary initDiary(void);
+void initDiaryWithFile(Diary *d, char *fileName);
 Diary initWeeks(void);
 Boolean empty(Diary d);
 Diary createWeek(char *year, int weekNumber);
 void insertFirst(Diary *d, char *year, int weekNumber);
 void displayWeeksList(Diary d);
 
+void removeBackSlashN(char *s);
+void recupString(char* e, char*s, int debut,int fin);
 
 #endif
