@@ -13,6 +13,8 @@ ActionsList initActions(void){
 //     }
 // }
 
+//coucou c'est mathilde
+
 void displayActionsList(ActionsList l){
     while (l != NULL)
     {
@@ -20,4 +22,8 @@ void displayActionsList(ActionsList l){
         l = l->next;
     }
     printf("\n");
+}
+
+void nulle(void){
+    
 }
