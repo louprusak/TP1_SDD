@@ -13,7 +13,7 @@ ActionsList initActions(void){
 //     }
 // }
 
-//coucou c'est mathilde
+
 
 void displayActionsList(ActionsList l){
     while (l != NULL)
