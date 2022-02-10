@@ -30,5 +30,6 @@ typedef struct action{
 
 ActionsList initActions(void);
 void displayActionsList(ActionsList l);
+void addAction (ActionsList list, int day,int hour, char name[]);
 
 #endif

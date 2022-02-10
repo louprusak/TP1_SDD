@@ -13,17 +13,46 @@ ActionsList initActions(void){
 //     }
 // }
 
+void addAction (ActionsList list, int day,int hour, char name[10]){
+    ActionsList curr = list;
+
+    ActionsList tmp;
+    tmp = (ActionsList) malloc(sizeof(Action_t));
+    tmp->dayNumber=day;
+    tmp->hour = hour;
+    strcpy(tmp->actionName,name);
+    tmp->next = NULL;
+
+    displayActionsList(tmp);
+
+    tmp = (ActionsList) malloc (sizeof(Action_t));
+    if (list){
+        ActionsList prec;
+        while (curr!=NULL && curr->dayNumber < day){
+            prec = curr;
+            curr=curr->next;
+        }
+        if (curr->dayNumber == day){
+            while (curr!=NULL && curr->hour < hour){
+                prec = curr;
+                curr=curr->next;
+            }
+        }
+        prec->next = tmp;
+        tmp->next = curr;
+    }else{
+        list = tmp;
+
+    }
+}
 
 
 void displayActionsList(ActionsList l){
     while (l != NULL)
     {
-        printf("\t\t Jour %d à %d : %s\n",l->dayNumber, l->hour, l->actionName);
+        printf("\t\t Jour %d à %d h : %s\n",l->dayNumber, l->hour, l->actionName);
         l = l->next;
     }
     printf("\n");
 }
 
-void nulle(void){
-    
-}
