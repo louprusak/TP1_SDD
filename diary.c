@@ -43,6 +43,10 @@ void initDiaryWithFile(Diary *d, char *fileName){
             recupString(ligne,text,9,strlen(ligne));
             
             printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Texte: %s\n",year, week, day, hour,text);
+
+            // Chercher si la semaine est présente
+                // Si oui on ajoute seulement l'action à la semaine
+                // Sinon on crée une semaine et on ajoute l'action
         }
     }
 }
