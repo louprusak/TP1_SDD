@@ -13,7 +13,7 @@ ActionsList initActions(void){
 //     }
 // }
 
-void addAction (ActionsList list, int day,int hour, char name[10]){
+void addAction (ActionsList list, int day,int hour, char name[ACTION_NAME_SIZE]){ // /!\ ne pas mettre de taille dans les prototypes
     ActionsList curr = list;
 
     ActionsList tmp;

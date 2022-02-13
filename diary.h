@@ -10,6 +10,15 @@
 #include "actions.h"
 
 /*---------------------------------------------------------------*/
+/* Constantes
+/*---------------------------------------------------------------*/
+
+#define FILENAME_SIZE 100
+#define LINE_SIZE 21
+#define YEAR_SIZE 5
+#define WEEK_SIZE 3
+
+/*---------------------------------------------------------------*/
 //                       Structure Semaines
 //
 // Structure de type maillon de la liste des semaines
@@ -31,6 +40,10 @@ typedef struct week{
 /*---------------------------------------------------------------*/
 typedef enum {TRUE, FALSE} Boolean;
 
+
+/*---------------------------------------------------------------*/
+/* Fonctions
+/*---------------------------------------------------------------*/
 Diary initDiary(void);
 void initDiaryWithFile(Diary *d, char *fileName);
 Diary initWeeks(void);

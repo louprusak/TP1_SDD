@@ -27,20 +27,20 @@ Diary initDiary(void){
 
 void initDiaryWithFile(Diary *d, char *fileName){
 
-    char ligne[21]="";
-    char year[5]="", week[3]="", hour[3]="", text[10]="", day[2]="";
+    char line[LINE_SIZE]="";
+    char year[YEAR_SIZE]="", week[WEEK_SIZE]="", hour[HOUR_SIZE]="", text[ACTION_NAME_SIZE]="", day[DAY_SIZE]="";
 
     FILE* flot = fopen(fileName, "r");
     if(flot){
-        while(fgets(ligne,100,flot)){
+        while(fgets(line,LINE_SIZE,flot)){
 
-            printf("Ligne: %s\n",ligne);
+            printf("Ligne: %s\n",line);
 
-            recupString(ligne,year,0,3);
-            recupString(ligne,week,4,5);
-            recupString(ligne,day,6,6);
-            recupString(ligne,hour,7,8);
-            recupString(ligne,text,9,strlen(ligne));
+            recupString(line,year,0,3);
+            recupString(line,week,4,5);
+            recupString(line,day,6,6);
+            recupString(line,hour,7,8);
+            recupString(line,text,9,strlen(line));
             
             printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Texte: %s\n",year, week, day, hour,text);
 

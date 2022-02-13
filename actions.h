@@ -12,6 +12,14 @@
 #include "string.h"
 
 /*---------------------------------------------------------------*/
+// Constantes
+/*---------------------------------------------------------------*/
+
+#define ACTION_NAME_SIZE 10
+#define DAY_SIZE 2
+#define HOUR_SIZE 3
+
+/*---------------------------------------------------------------*/
 //                       Structure Action
 //
 // Structure de type maillon de la liste des actions
@@ -27,6 +35,10 @@ typedef struct action{
     char actionName[10];         
     struct action *next;        
 }Action_t, *ActionsList;
+
+/*---------------------------------------------------------------*/
+// Fonctions
+/*---------------------------------------------------------------*/
 
 ActionsList initActions(void);
 void displayActionsList(ActionsList l);
