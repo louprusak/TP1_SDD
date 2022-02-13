@@ -27,8 +27,8 @@ Diary initDiary(void){
 
 void initDiaryWithFile(Diary *d, char *fileName){
 
-    char ligne[21];
-    char year[5], week[3], hour[3], text[10], day[2];
+    char ligne[21]="";
+    char year[5]="", week[3]="", hour[3]="", text[10]="", day[2]="";
 
     FILE* flot = fopen(fileName, "r");
     if(flot){
@@ -36,23 +36,11 @@ void initDiaryWithFile(Diary *d, char *fileName){
 
             printf("Ligne: %s\n",ligne);
 
-            memcpy(year,&ligne[0],4);
-            memcpy(week,&ligne[4],2);
-            memcpy(day,&ligne[6],1);
-            memcpy(hour,&ligne[7],2);
-            //memcpy(text,&ligne[9],strlen(ligne)-9);
-
-            // strncat(year,ligne,4);
-            // strncat(week,ligne+4,2);
-            // strncat(day,ligne+6,1);
-            // strncat(hour,ligne+7,2);
-            // strncat(text,ligne+9,strlen(ligne)-9);
-
-            //recupString(ligne,year,0,4);
-            // recupString(ligne,week,4,6);
-            // recupString(ligne,day,6,8);
-            // recupString(ligne,hour,8,10);
-            //recupString(ligne,text,9,strlen(ligne));
+            recupString(ligne,year,0,3);
+            recupString(ligne,week,4,5);
+            recupString(ligne,day,6,6);
+            recupString(ligne,hour,7,8);
+            recupString(ligne,text,9,strlen(ligne));
             
             printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Texte: %s\n",year, week, day, hour,text);
         }

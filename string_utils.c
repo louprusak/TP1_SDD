@@ -6,15 +6,15 @@ void removeBackSlashN(char *s){
 }
 
 //récupérer une partie de la chaine de carcatères depuis un début et jusqu'à une fin
-void recupString(char *e, char *s, int debut,int fin){
+void recupString(char *input, char *output, int debut,int fin){
     int j = 0;
-    for (int i = debut; i < fin; i++)
+    for (int i = debut; i <= fin; i++)
     {
-        if(e[i] != '\0'){
-            s[j] = e[i];
+        if(input[i] != '\0'){
+            output[j] = input[i];
             j++;
         }
         
     }
-    //s[strlen(s)]='\0';
+    output[strlen(output)]='\0';
 }
