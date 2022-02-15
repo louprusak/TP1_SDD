@@ -43,7 +43,7 @@ void insertFirstAction(ActionsList *d, int day, int hour, char * name){
 // curr: pointeur de parcours de liste
 // prec : pointeur de l'élément précédant celui en cours de lecture
 
-int addAction (ActionsList list, int day,int hour, char name[]){
+int addAction (ActionsList list, int day,int hour, char *name){
 
     ActionsList curr = list;
     int code = 1; // indicateur d'erreur
