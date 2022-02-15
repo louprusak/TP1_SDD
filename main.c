@@ -1,6 +1,6 @@
 #include "diary.h"
 
-
+//Initialisation de l'Agenda
 void initDiaryMain(Diary *pt_d){
     Diary d = *pt_d;
     d = initDiary();
@@ -28,7 +28,7 @@ void initDiaryMain(Diary *pt_d){
 }
 
 
-
+//Programme principal
 int main(void){
 
     int quit = 0;
