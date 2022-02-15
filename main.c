@@ -15,14 +15,18 @@ void initDiaryMain(Diary *pt_d){
     scanf("%s",filename);
     removeBackSlashN(filename);
 
-    initDiaryWithFile(&d,filename);
+    //initDiaryWithFile(&d,filename);
 
     insertFirst(&d,"2022",1);
-    insertFirst(&d,"2021",2);
-    insertFirst(&d,"2020",3);
-    insertFirst(&d,"2019",4);
-    insertFirst(&d,"2018",5);
-    insertFirst(&d,"2017",6);
+    addAction(&d->actionsList, 5, atoi("08"),"Espagnol");
+    addAction(&d->actionsList, 1, atoi("08"),"BDD");
+    addAction(&d->actionsList, 5, atoi("10"),"Anglais");
+    addAction(&d->actionsList, 6, atoi("12"),"Manger");
+    // insertFirst(&d,"2021",2);
+    // insertFirst(&d,"2020",3);
+    // insertFirst(&d,"2019",4);
+    // insertFirst(&d,"2018",5);
+    // insertFirst(&d,"2017",6);
 
     displayWeeksList(d);
 }
