@@ -43,7 +43,7 @@ typedef struct action{
 ActionsList initActions(void);
 ActionsList createAction(int day, int hour, char * name);
 void insertFirstAction(ActionsList *d, int day, int hour, char * name);
-int addAction (ActionsList list, int day,int hour, char name[]);
+int addAction (ActionsList *plist, int day,int hour, char name[]);
 int supprAction (ActionsList list, int day, int hour, char name[]);
 void displayActionsList(ActionsList l);
 

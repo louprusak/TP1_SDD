@@ -34,7 +34,7 @@ void initDiaryWithFile(Diary *d, char *fileName){
     if(flot){
         while(fgets(line,LINE_SIZE,flot)){
 
-            printf("Ligne: %s\n",line);
+            //printf("Ligne: %s\n",line);
 
             recupString(line,year,0,3);
             recupString(line,week,4,5);
@@ -42,7 +42,13 @@ void initDiaryWithFile(Diary *d, char *fileName){
             recupString(line,hour,7,8);
             recupString(line,text,9,strlen(line));
             
-            printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Texte: %s\n",year, week, day, hour,text);
+            //printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Texte: %s\n",year, week, day, hour,text);
+
+            
+
+
+            //addWeek()
+
 
             // Chercher si la semaine est présente
                 // Si oui on ajoute seulement l'action à la semaine
@@ -97,13 +103,13 @@ int length(Diary d){
 // }
 
 Diary createWeek(char *year, int weekNumber){
-    printf("Je passe dans le creatWeek\n");
+    //printf("Je passe dans le creatWeek\n");
     week_t* tmp = (week_t*) malloc(sizeof(week_t));
     if(tmp){
-        printf("Allocation réussie\n");
-        printf("%s -> %s\n",year,tmp->year);
+        //printf("Allocation réussie\n");
+        //printf("%s -> %s\n",year,tmp->year);
         strcpy(tmp->year,year);
-        printf("%s -> %s\n",year,tmp->year);
+        //printf("%s -> %s\n",year,tmp->year);
         tmp->weekNumber = weekNumber;
         tmp->actionsList = initActions();
         tmp->next = NULL;
