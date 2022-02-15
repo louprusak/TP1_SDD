@@ -216,7 +216,7 @@ int addAction(ActionsList *plist, int day,int hour, char *name){
 void displayActionsList(ActionsList list){
     while (list!= NULL)
     {
-        printf("\t\t Jour %d à %d h : %s\n",list->dayNumber, list->hour, list->actionName);
+        printf("\t\t Jour %d à %02d h : %s\n",list->dayNumber, list->hour, list->actionName);
         list = list->next;
     }
     printf("\n");
