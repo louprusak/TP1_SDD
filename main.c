@@ -48,7 +48,7 @@ int main(void){
             "\n\t1) Initialiser l'Agenda à partir d'un fichier texte\n"
             "\t2) Ajouter une action dans l'Agenda (WORK IN PROGRESS)\n"
             "\t3) Supprimer une action de l'Agenda (WORK IN PROGRESS)\n"
-            "\t4) Sauvegarder l'Agenda en fichier texte\n"
+            "\t4) Sauvegarder l'Agenda en fichier texte (WORK IN PROGRESS)\n"
             "\t5) Afficher l'Agenda\n"
             "\n\t0) Quitter\n"
             "\nVeuillez indiquer votre choix en tapant le numéro associé sur votre clavier : "
