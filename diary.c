@@ -21,6 +21,7 @@
 //     }
 // }
 
+//Initialisation de la liste des semaines (Agenda)
 Diary initDiary(void){
     return NULL;
 }
@@ -57,13 +58,31 @@ void initDiaryWithFile(Diary *d, char *fileName){
     }
 }
 
+Diary createWeek(char * year, int weekNumber,int day, int hour, char * name){
+    printf("Je passe dans le creatWeek\n");
+    week_t* tmp = (week_t*) malloc(sizeof(week_t));
+    if(tmp){
+        //Allocation réussie
+        strcpy(tmp->year,year);
+        tmp->weekNumber = weekNumber;
+        addAction(&(tmp->actionsList), day, hour, name);
+        tmp->next = NULL;
+    }
+    return tmp;
+}
 
-
-
-
-//Initialisation de la liste des semaines (Agenda)
-Diary initWeeks(void){
-    return NULL;
+// Insert en tête une semaine dans la liste des semaines
+void insertFirst(Diary *d, char * year, int weekNumber,int day, int hour, char* name){
+    week_t *tmp = createWeek(year, weekNumber, day, hour, name);
+    if(tmp){
+        if(!*d){
+            tmp->next = NULL;
+        }
+        else{
+            tmp->next = *d;
+        }
+        *d = tmp;
+    }
 }
 
 //Savoir si une liste est vide
@@ -84,75 +103,85 @@ int length(Diary d){
     return i;
 }
 
-// void addWeek(Diary d, char *year, int weekNumber){
-//     Diary curr = d;
-//     while(curr->next != NULL){
-//         while(curr->year < year){
-//             curr = curr->next;
-//         }
-//         if(curr->year == year){
-//             while(curr->weekNumber < weekNumber){
-//                 curr = curr->next;
-//             }
-//             if(curr->weekNumber == weekNumber){
-                
-//             }
-//         }
+
+Boolean addWeek(Diary * pd,char * year, int weekNumber,int dayNumber, int hour, char *name){
+    Boolean code = TRUE; // indicateur d'erreur
+    
+    if(!*pd){
+        insertFirst(pd,year,weekNumber,dayNumber, hour, name);
+    }
+    else{
+
+        Diary curr = *pd;
+        Diary prec = curr;
         
-//     }
-// }
-
-Diary createWeek(char *year, int weekNumber){
-    //printf("Je passe dans le creatWeek\n");
-    week_t* tmp = (week_t*) malloc(sizeof(week_t));
-    if(tmp){
-        //printf("Allocation réussie\n");
-        //printf("%s -> %s\n",year,tmp->year);
-        strcpy(tmp->year,year);
-        //printf("%s -> %s\n",year,tmp->year);
-        tmp->weekNumber = weekNumber;
-        tmp->actionsList = initActions();
-        tmp->next = NULL;
-    }
-    return tmp;
-}
-
-// Renvoie la position du maillon avec l'année et le numéro de semaine ou 
-// int exist(Diary d, char *year, int weekNumber){
-//     int i = 0;
-//     while (d->next)
-//     {
-//         if ((strcmp(year, d->year) == 0 && weekNumber == d->weekNumber) || )
-//         {
-//             break;
-//         }
-
-//         if(strcmp(year, d->year) > 0){
-
-//         }
-//         i++;
-//     }
-//     return i;
-// }
-
-// Insert en tête une semaine dans la liste des semaines
-void insertFirst(Diary *d, char *year, int weekNumber){
-    week_t *tmp = createWeek(year, weekNumber);
-    if(tmp){
-        if(!*d){
-            tmp->next = NULL;
-        }
+        //Si l'année à ajouter est inférieure à la première de la liste
+        //Ou qu'il est égal mais la semaine est plus petite que la première
+        //Alors l'élement va être en tête de liste 
+        if (strcmp(curr->year,year) > 0 || (strcmp(curr->year,year) == 0 && curr->weekNumber > weekNumber)){
+            insertFirst(pd, year, weekNumber,dayNumber, hour, name);
+        } 
         else{
-            tmp->next = *d;
+            Diary tmp = createWeek(year, weekNumber, dayNumber, hour, name);
+
+            //Tri en fonction du numéro de l'année
+            //On se déplace jusqu'à obtenir un élément sup ou égal à year
+            while (curr->next != NULL && strcmp(curr->year,year)<0){
+                prec = curr;
+                curr=curr->next;
+            }
+
+            //Si l'année existe dans la liste
+            if (strcmp(curr->year,year) == 0){
+
+                //Tri en fonction des semaines
+
+                //Toutes les semaines sont sup alors on ajoute en tête de l'année
+                if (curr->weekNumber > weekNumber){
+                    prec->next = tmp;
+                    tmp->next = curr;
+                }
+                else{
+                    //On se déplace jusqu'à obtenir une semaine supérieure ou égale dans la liste sans changer d'année
+                    while (curr->next!= NULL && strcmp(curr->year,year)==0 && curr->weekNumber < weekNumber){
+                        prec = curr;
+                        curr = curr->next;
+                    }
+
+                    //Si on a extactement la même semaine on ajoute l'action à la liste des actions
+                    if (curr->weekNumber == weekNumber){
+                        code = addAction(&(curr->actionsList),dayNumber,hour,name);
+                    } 
+                    else {
+                        if (curr->next){
+                            prec->next = tmp;
+                            tmp->next = curr;
+                        } else {
+                            // insertion en fin
+                            curr->next = tmp;
+                        }
+                    }
+                }
+            }
+            //Si il n'existe pas on le crée et on insère
+            else{
+                if (curr->next){
+                    prec->next = tmp;
+                    tmp->next = curr;
+                } else {
+                    // insertion en fin
+                    curr->next = tmp;
+                }
+            }
         }
-        *d = tmp;
     }
-}
+    return code;
+ }
 
 //Affiche la liste des semaines (Agenda)
 void displayWeeksList(Diary d){
     printf("Agenda :\n");
-    while (empty(d))
+    while (!empty(d))
     {
         printf("\tAnnée %s semaine %d :\n",d->year, d->weekNumber);
         displayActionsList(d->actionsList);
@@ -160,8 +189,3 @@ void displayWeeksList(Diary d){
     }
     printf("\n");
 }
-
-
-//Ajout dans les listes
-
-

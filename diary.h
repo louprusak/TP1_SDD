@@ -35,21 +35,17 @@ typedef struct week{
     struct week *next;
 }week_t, *Diary;
 
-/*---------------------------------------------------------------*/
-// Définition du type booléen personnalisé
-/*---------------------------------------------------------------*/
-typedef enum {TRUE, FALSE} Boolean;
-
 
 /*---------------------------------------------------------------*/
 /* Fonctions
 /*---------------------------------------------------------------*/
 Diary initDiary(void);
 void initDiaryWithFile(Diary *d, char *fileName);
-Diary initWeeks(void);
+Diary createWeek(char * year, int weekNumber,int day, int hour, char * name);
+void insertFirst(Diary *d, char * year, int weekNumber,int day, int hour, char* name);
 Boolean empty(Diary d);
-Diary createWeek(char *year, int weekNumber);
-void insertFirst(Diary *d, char *year, int weekNumber);
+int length(Diary d);
+Boolean addWeek(Diary * pd,char * year, int weekNumber,int dayNumber, int hour, char *name);
 void displayWeeksList(Diary d);
 
 void removeBackSlashN(char *s);
