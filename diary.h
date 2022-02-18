@@ -9,16 +9,16 @@
 
 #include "actions.h"
 
-/*---------------------------------------------------------------*/
-/* Constantes
-/*---------------------------------------------------------------*/
+//---------------------------------------------------------------
+// Constantes
+//---------------------------------------------------------------
 
 #define FILENAME_SIZE 100
 #define LINE_SIZE 21
 #define YEAR_SIZE 5
 #define WEEK_SIZE 3
 
-/*---------------------------------------------------------------*/
+//---------------------------------------------------------------
 //                       Structure Semaines
 //
 // Structure de type maillon de la liste des semaines
@@ -27,7 +27,7 @@
 // -weekNumber : Numéro de la semaine dans l'année
 // -actionsList : Liste des actions à réaliser dans la semaine
 // -next : Pointeur vers la semaine suivante
-/*---------------------------------------------------------------*/
+//---------------------------------------------------------------
 typedef struct week{
     char year[5];
     int weekNumber;
@@ -35,19 +35,15 @@ typedef struct week{
     struct week *next;
 }week_t, *Diary;
 
-/*---------------------------------------------------------------*/
-// Définition du type booléen personnalisé
-/*---------------------------------------------------------------*/
-typedef enum {TRUE, FALSE} Boolean;
-
-
-/*---------------------------------------------------------------*/
-/* Fonctions
-/*---------------------------------------------------------------*/
+//---------------------------------------------------------------
+// Fonctions
+//---------------------------------------------------------------
 Diary initDiary(void);
 void initDiaryWithFile(Diary *d, char *fileName);
+void saveDiary(Diary d, char *filename);
 Diary initWeeks(void);
-Boolean empty(Diary d);
+Boolean emptyDiary(Diary d);
+int lengthDiary(Diary d);
 Diary createWeek(char *year, int weekNumber);
 void insertFirst(Diary *d, char *year, int weekNumber);
 void displayWeeksList(Diary d);

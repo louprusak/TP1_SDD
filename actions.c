@@ -40,6 +40,24 @@ void insertFirstAction(ActionsList *d, int day, int hour, char * name){
     }
 }
 
+//Savoir si une liste est vide
+Boolean emptyActions(ActionsList l){
+    if (l == NULL){
+        return TRUE;
+    }
+    return FALSE;
+}
+
+//Connaitre la longueur de la liste
+int lengthActions(ActionsList l){
+    int i = 0;
+    while(!emptyActions(l)){
+        i++;
+        l = l->next;
+    }
+    return i;
+}
+
 // // curr: pointeur de parcours de liste
 // // prec : pointeur de l'élément précédant celui en cours de lecture
 
@@ -214,10 +232,12 @@ int addAction(ActionsList *plist, int day,int hour, char *name){
 // }
 
 void displayActionsList(ActionsList list){
+    //printf("je passe dans le displayactions\n");
     while (list!= NULL)
     {
+        //printf("saucisse\n");
         printf("\t\t Jour %d à %02d h : %s\n",list->dayNumber, list->hour, list->actionName);
         list = list->next;
     }
-    printf("\n");
+    //printf("\n");
 }

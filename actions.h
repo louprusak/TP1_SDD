@@ -1,8 +1,8 @@
-/*---------------------------------------------------------------*/
+//-----------------------------------------------------------------
 // ***************** FICHIER ENTETE ACTIONS **********************
 // Fichier contenant la structure de liste chainée nécessaire 
 // pour la gestion des actions à réaliser par semaines
-/*---------------------------------------------------------------*/
+//-----------------------------------------------------------------
 
 #ifndef ACTIONS_H
 #define ACTIONS_H
@@ -11,15 +11,15 @@
 #include <stdlib.h>
 #include "string.h"
 
-/*---------------------------------------------------------------*/
+//-----------------------------------------------------------------
 // Constantes
-/*---------------------------------------------------------------*/
+//-----------------------------------------------------------------
 
 #define ACTION_NAME_SIZE 10
 #define DAY_SIZE 2
 #define HOUR_SIZE 3
 
-/*---------------------------------------------------------------*/
+//-----------------------------------------------------------------
 //                       Structure Action
 //
 // Structure de type maillon de la liste des actions
@@ -28,19 +28,26 @@
 // -hour : Heure de l'action (entre 00 et 24)
 // -actionName : Nom de l'action à réaliser
 // -next : Pointeur vers l'action suivante
-/*---------------------------------------------------------------*/
+//-----------------------------------------------------------------
 typedef struct action{
     int dayNumber;           
     int hour;                
-    char actionName[10];         
+    char actionName[11];         
     struct action *next;        
 }Action_t, *ActionsList;
 
-/*---------------------------------------------------------------*/
+//---------------------------------------------------------------
+// Définition du type booléen personnalisé
+//---------------------------------------------------------------
+typedef enum {TRUE, FALSE} Boolean;
+
+//-----------------------------------------------------------------
 // Fonctions
-/*---------------------------------------------------------------*/
+//-----------------------------------------------------------------
 
 ActionsList initActions(void);
+Boolean emptyActions(ActionsList l);
+int lengthActions(ActionsList l);
 ActionsList createAction(int day, int hour, char * name);
 void insertFirstAction(ActionsList *d, int day, int hour, char * name);
 int addAction (ActionsList *plist, int day,int hour, char name[]);
