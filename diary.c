@@ -25,16 +25,18 @@ Diary initDiary(void){
     return NULL;
 }
 
-void initDiaryWithFile(Diary *d, char *fileName){
+void initDiaryWithFile(Diary *pd, char *fileName){
+    Diary d = *pd;
+    d = initDiary();
 
     char line[LINE_SIZE]="";
     char year[YEAR_SIZE]="", week[WEEK_SIZE]="", hour[HOUR_SIZE]="", text[ACTION_NAME_SIZE]="", day[DAY_SIZE]="";
 
-    FILE* flot = fopen(fileName, "r");
-    if(flot){
-        while(fgets(line,LINE_SIZE,flot)){
+    FILE* file = fopen(fileName, "r");
+    if(file){
+        while(fgets(line,LINE_SIZE,file)){
 
-            //printf("Ligne: %s\n",line);
+            printf("Ligne: %s\n",line);
 
             recupString(line,year,0,3);
             recupString(line,week,4,5);
@@ -42,8 +44,13 @@ void initDiaryWithFile(Diary *d, char *fileName){
             recupString(line,hour,7,8);
             recupString(line,text,9,strlen(line));
             
-            //printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Texte: %s\n",year, week, day, hour,text);
+            printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Texte: %s\n",year, week, day, hour,text);
 
+            insertFirst(&d,"2022",1);
+            addAction(&d->actionsList, 5, atoi("08"),"Espagnol");
+            addAction(&d->actionsList, 1, atoi("08"),"BDD");
+            addAction(&d->actionsList, 5, atoi("10"),"Anglais");
+            addAction(&d->actionsList, 6, atoi("12"),"Manger");
             
 
 
@@ -55,6 +62,7 @@ void initDiaryWithFile(Diary *d, char *fileName){
                 // Sinon on crée une semaine et on ajoute l'action
         }
     }
+    fclose(file);
 }
 
 
@@ -67,7 +75,7 @@ Diary initWeeks(void){
 }
 
 //Savoir si une liste est vide
-Boolean empty(Diary d){
+Boolean emptyDiary(Diary d){
     if (d == NULL){
         return TRUE;
     }
@@ -75,9 +83,9 @@ Boolean empty(Diary d){
 }
 
 //Connaitre la longueur de la liste
-int length(Diary d){
+int lengthDiary(Diary d){
     int i = 0;
-    while(!empty(d)){
+    while(!emptyDiary(d)){
         i++;
         d = d->next;
     }
@@ -152,13 +160,33 @@ void insertFirst(Diary *d, char *year, int weekNumber){
 //Affiche la liste des semaines (Agenda)
 void displayWeeksList(Diary d){
     printf("Agenda :\n");
-    while (empty(d))
+    while (d != NULL)
     {
         printf("\tAnnée %s semaine %d :\n",d->year, d->weekNumber);
         displayActionsList(d->actionsList);
         d = d->next;
     }
     printf("\n");
+}
+
+//Sauvegarde de l'Agenda dans un fichier texte
+void saveDiary(Diary d, char *filename){
+    printf("Je passe dans le save\n");
+    FILE *file = fopen(filename,"w");
+    if(file){
+        printf("%s %d\n",d->year,d->weekNumber);
+
+        while(d != NULL){
+
+            while(d->actionsList != NULL){
+                fprintf(file,"%s%02d%d%02d%s\n",d->year,d->weekNumber,d->actionsList->dayNumber,d->actionsList->hour,d->actionsList->actionName);
+                d->actionsList = d->actionsList->next;
+            }
+            
+            d = d->next;
+        }
+    }
+    fclose(file);
 }
 
 

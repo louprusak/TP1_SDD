@@ -1,43 +1,12 @@
 #include "diary.h"
 
-//Initialisation de l'Agenda
-void initDiaryMain(Diary *pt_d){
-    Diary d = *pt_d;
-    d = initDiary();
-
-    char filename[100] = "";
-
-    printf("___________________________________________________________\n"
-            "1) Initialisation de l'Agenda à partir d'un fichier texte. \n"
-            "\nVeuillez enter le nom du fichier texte : "
-            );
-
-    scanf("%s",filename);
-    removeBackSlashN(filename);
-
-    //initDiaryWithFile(&d,filename);
-
-    insertFirst(&d,"2022",1);
-    addAction(&d->actionsList, 5, atoi("08"),"Espagnol");
-    addAction(&d->actionsList, 1, atoi("08"),"BDD");
-    addAction(&d->actionsList, 5, atoi("10"),"Anglais");
-    addAction(&d->actionsList, 6, atoi("12"),"Manger");
-    // insertFirst(&d,"2021",2);
-    // insertFirst(&d,"2020",3);
-    // insertFirst(&d,"2019",4);
-    // insertFirst(&d,"2018",5);
-    // insertFirst(&d,"2017",6);
-
-    displayWeeksList(d);
-}
-
-
 //Programme principal
 int main(void){
 
     int quit = 0;
     int answer = -1;
-    Diary d;
+    char filename[FILENAME_SIZE];
+    Diary d,d2;
 
     while(!quit){
 
@@ -59,16 +28,42 @@ int main(void){
         switch (answer)
         {
             case 1:
-                initDiaryMain(&d);
+                //Initialisation de l'Agenda à partir d'un fichier .txt
+                printf("___________________________________________________________\n"
+                        "1) Initialisation de l'Agenda à partir d'un fichier texte. \n"
+                        "\nVeuillez enter le nom du fichier texte : "
+                );
+                scanf("%s",filename);
+                initDiaryWithFile(&d,filename);
                 break;
             case 2:
                 //Ajout d'une action dans l'Agenda
+
                 break;
             case 3:
                 //Supression d'une action de l'Agenda
                 break;
             case 4:
                 //Sauvegarde de l'Agenda
+                printf("___________________________________________________________\n"
+                        "4) Sauvegarde de l'Agenda en fichier texte. \n"
+                        "\nVeuillez enter le nom du fichier pour la sauvegarde : "
+                );
+                scanf("%s",filename);
+                printf("%s",filename);
+                d = initDiary();
+
+                insertFirst(&d,"2022",1);
+                addAction(&d->actionsList, 5, atoi("08"),"Espagnol");
+                addAction(&d->actionsList, 1, atoi("08"),"BDD");
+                addAction(&d->actionsList, 5, atoi("10"),"Anglais");
+                addAction(&d->actionsList, 6, atoi("12"),"Manger");
+
+                displayWeeksList(d);
+                printf("insertions OK\n");
+                displayWeeksList(d);
+                printf("Affichage OK\n");
+                saveDiary(d,filename);
                 break;
             case 5:
                 //Affichage de l'Agenda
