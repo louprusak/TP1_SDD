@@ -61,67 +61,10 @@ int lengthActions(ActionsList l){
 // // curr: pointeur de parcours de liste
 // // prec : pointeur de l'élément précédant celui en cours de lecture
 
-// int addAction (ActionsList *plist, int day,int hour, char *name){
-
-//     ActionsList curr = list;
-//     int code = 1; // indicateur d'erreur
-
-//     if (list){ // La liste n'est pas vide
-
-//         ActionsList prec = curr;
-
-//         if (curr->dayNumber > day || (curr->dayNumber == day && curr->hour > hour)){ // l'élément va en tête de liste
-//             ActionsList * plist = &list;
-//             insertFirstAction(plist, day, hour, name); // NE FONCTIONNE PAS !!!!
-//         } 
-//         else {
-
-//             ActionsList tmp = createAction (day, hour, name);
-
-//             while (curr->next != NULL && curr->dayNumber < day){ // se déplacer jusqu'à obtenir un élément sup ou égal à day
-//                 prec = curr;
-//                 curr=curr->next;
-//             }
-//             if (day == curr->dayNumber){ // Cas d'un élément déjà présent pour ce jour-là
-//                 if (curr->hour > hour){ // l'élément est rajouter avant se place avant curr
-//                     prec->next = tmp;
-//                     tmp->next = curr;
-//                 } else {
-//                     while (curr->next!= NULL && curr->dayNumber == day && curr->hour < hour){ // se déplacer jusqu'à elmt >= à hour
-//                         prec = curr;
-//                         curr = curr->next;
-//                     }
-//                     if (curr->hour == hour){
-//                         code = 0; // Il y a une erreur car quelque chose est déjà enrgistré
-//                     } else {
-//                         if (curr->next){
-//                             prec->next = tmp;
-//                             tmp->next = curr;
-//                         } else {
-//                             // insertion en fin
-//                             curr->next = tmp;
-//                         }
-//                     }
-//                 }
-//             } else {
-//                 if (curr->next){
-//                     prec->next = tmp;
-//                     tmp->next = curr;
-//                 } else {
-//                     // insertion en fin
-//                     curr->next = tmp;
-//                 }
-//             }
-//         }
-
-//     }else{ // Si la liste est vide
-//         insertFirstAction(plist,day,hour,name); // NE FONCTIONNE PAS !!!
-//     }
-//     return code;
-// }
-
-int addAction(ActionsList *plist, int day,int hour, char *name){
-    int code = 1; // indicateur d'erreur
+// curr: pointeur de parcours de liste
+// prec : pointeur de l'élément précédant celui en cours de lecture
+Boolean addAction(ActionsList *plist, int day,int hour, char *name){
+    Boolean code = TRUE; // indicateur d'erreur
     
     if(!*plist ){
         insertFirstAction(plist,day,hour,name);
@@ -166,7 +109,7 @@ int addAction(ActionsList *plist, int day,int hour, char *name){
 
                     //Si on a extactement la même heure on ne peut pas avoir deux actions à la même heure donc on renvoie une erreur
                     if (curr->hour == hour){
-                        code = 0;
+                        code = FALSE;
                     } 
                     else {
                         if (curr->next){
