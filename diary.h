@@ -8,6 +8,7 @@
 #define DIARY_H
 
 #include "actions.h"
+#include "pattern.h"
 
 //---------------------------------------------------------------
 // Constantes

@@ -47,7 +47,7 @@ void initDiaryWithFile(Diary *pd, char *fileName){
             
             printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Texte: %s\n",year, week, day, hour,text);
 
-            //insertFirst(&d,"2022",1);
+            insertFirstWeek(&d,"2022",1);
             addAction(&d->actionsList, 5, atoi("08"),"Espagnol");
             addAction(&d->actionsList, 1, atoi("08"),"BDD");
             addAction(&d->actionsList, 5, atoi("10"),"Anglais");

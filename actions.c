@@ -4,15 +4,6 @@ ActionsList initActions(void){
     return NULL;
 }
 
-// ActionsList initWeeksByFile(char *fileName){
-//     FILE *file = fopen(fileName,"r");
-//     if(file){
-//         while(!feof(file)){
-        
-//         }
-//     }
-// }
-
 // Creation of a new action
 ActionsList createAction(int day, int hour, char *name){
     ActionsList tmp = (ActionsList) malloc(sizeof(Action_t));
@@ -57,9 +48,6 @@ int lengthActions(ActionsList l){
     }
     return i;
 }
-
-// // curr: pointeur de parcours de liste
-// // prec : pointeur de l'élément précédant celui en cours de lecture
 
 // curr: pointeur de parcours de liste
 // prec : pointeur de l'élément précédant celui en cours de lecture
