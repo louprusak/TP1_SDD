@@ -68,7 +68,6 @@ void initDiaryWithFile(Diary *pd, char *fileName){
 
 //Création d'une semaine avec une action insérée
 Diary createWeekWithAction(char * year, int weekNumber,int day, int hour, char * name){
-    printf("Je passe dans le creatWeek\n");
     week_t* tmp = (week_t*) malloc(sizeof(week_t));
     if(tmp){
         //Allocation réussie
@@ -82,7 +81,7 @@ Diary createWeekWithAction(char * year, int weekNumber,int day, int hour, char *
 
 //Création d'une semaine avec une liste d'actions vide (POUR LES TESTS A ENLEVER SI BESOIN)
 Diary createWeek(char *year, int weekNumber){
-     printf("Je passe dans le creatWeek\n");
+     printf("Je passe dans le createWeek\n");
      week_t* tmp = (week_t*) malloc(sizeof(week_t));
      if(tmp){
          strcpy(tmp->year,year);

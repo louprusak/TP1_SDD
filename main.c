@@ -7,8 +7,12 @@ int main(int argc, char **argv){
     int answer = -1;
     int size = 0;
     char filename[FILENAME_SIZE];
-    Diary d;
+    Diary d = initDiary();
     patternList p;
+
+    char year[5];
+    char name[11];
+    int week,day,hour;
 
     while(!quit){
 
@@ -17,7 +21,7 @@ int main(int argc, char **argv){
             "#############################################################################\n"
             "\nChoisissez ce que vous voulez faire :\n"
             "\n\t1) Initialiser l'Agenda à partir du fichier texte passé en argument\n"
-            "\t2) Ajouter une action dans l'Agenda (WORK IN PROGRESS)\n"
+            "\t2) Ajouter une action dans l'Agenda\n"
             "\t3) Supprimer une action de l'Agenda (WORK IN PROGRESS)\n"
             "\t4) Obtenir la liste des jours avec actions contenant motif (WIP)\n"
             "\t5) Sauvegarder l'Agenda en fichier texte\n"
@@ -44,6 +48,20 @@ int main(int argc, char **argv){
                 break;
             case 2:
                 //Ajout d'une action dans l'Agenda
+
+                printf("Entrer l'année : ");
+                scanf("%s",year);
+                printf("\nEntrer la semaine :");
+                scanf("%d", &week);
+                printf("\nEntrer le jour : ");
+                scanf("%d", &day);
+                printf("\nEntrer l'heure : ");
+                scanf("%d", &day);
+                printf("\nEnetrer le nom de l'action: ");
+                scanf("%s", name);
+                printf("\n");
+                addWeek(&d,year,week,day,hour,name);
+                displayWeeksList(d);
 
                 break;
             case 3:
