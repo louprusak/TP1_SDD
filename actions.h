@@ -54,5 +54,6 @@ Boolean addAction(ActionsList *plist, int day,int hour, char *name);
 void supprFirstAction(ActionsList* plist);
 Boolean supprAction (ActionsList* plist, int day, int hour, char name[]);
 void displayActionsList(ActionsList list);
+void freeActionsList (ActionsList list);
 
 #endif

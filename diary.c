@@ -302,5 +302,16 @@ void saveDiary(Diary d, char *filename){
     fclose(file);
 }
 
+void free (Diary d){
+    Diary curr = d;
+    Diary suiv = curr->next;
+
+    while (suiv!=NULL){
+        freeActionsList(curr->actionsList);
+        free(curr);
+        curr=suiv;
+        suiv=suiv->next;
+    }
+}
 
 //Ajout dans les listes

@@ -186,3 +186,14 @@ void displayActionsList(ActionsList list){
         list = list->next;
     }
 }
+
+void freeActionsList (ActionsList list){
+    ActionsList curr = list;
+    ActionsList suiv = curr->next;
+
+    while (suiv!=NULL){
+        free(curr);
+        curr=suiv;
+        suiv=suiv->next;
+    }
+}
