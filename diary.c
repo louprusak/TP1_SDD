@@ -1,6 +1,6 @@
 #include "diary.h"
 
-
+////////////// INUTILE /////////////////
 // Diary initDiary(char *filename){
 //     char year[4] = "";
 //     int weekNumber = 0;
@@ -31,7 +31,7 @@ void initDiaryWithFile(Diary *pd, char *fileName){
     d = initDiary();
 
     char line[LINE_SIZE]="";
-    char year[YEAR_SIZE]="", week[WEEK_SIZE]="", hour[HOUR_SIZE]="", text[ACTION_NAME_SIZE]="", day[DAY_SIZE]="";
+    char year[YEAR_SIZE]="", week[WEEK_SIZE]="", hour[HOUR_SIZE]="", name[ACTION_NAME_SIZE]="", day[DAY_SIZE]="";
 
     FILE* file = fopen(fileName, "r");
     if(file){
@@ -43,24 +43,19 @@ void initDiaryWithFile(Diary *pd, char *fileName){
             recupString(line,week,4,5);
             recupString(line,day,6,6);
             recupString(line,hour,7,8);
-            recupString(line,text,9,strlen(line));
+            recupString(line,name,9,strlen(line));
             
-            printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Texte: %s\n",year, week, day, hour,text);
+            printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Nom de l'action: %s\n",year, week, day, hour,name);
 
-            insertFirstWeek(&d,"2022",1);
-            addAction(&d->actionsList, 5, atoi("08"),"Espagnol");
-            addAction(&d->actionsList, 1, atoi("08"),"BDD");
-            addAction(&d->actionsList, 5, atoi("10"),"Anglais");
-            addAction(&d->actionsList, 6, atoi("12"),"Manger");
+            addWeek(&d,year,atoi(week),atoi(day),atoi(hour),name);
+
+            ////////////// INUTILE /////////////////
+            // insertFirstWeek(&d,"2022",1);
+            // addAction(&d->actionsList, 5, atoi("08"),"Espagnol");
+            // addAction(&d->actionsList, 1, atoi("08"),"BDD");
+            // addAction(&d->actionsList, 5, atoi("10"),"Anglais");
+            // addAction(&d->actionsList, 6, atoi("12"),"Manger");
             
-
-
-            //addWeek()
-
-
-            // Chercher si la semaine est présente
-                // Si oui on ajoute seulement l'action à la semaine
-                // Sinon on crée une semaine et on ajoute l'action
         }
     }
     fclose(file);
@@ -79,19 +74,19 @@ Diary createWeekWithAction(char * year, int weekNumber,int day, int hour, char *
     return tmp;
 }
 
-
-//Création d'une semaine avec une liste d'actions vide (POUR LES TESTS A ENLEVER SI BESOIN)
-Diary createWeek(char *year, int weekNumber){
-     printf("Je passe dans le createWeek\n");
-     week_t* tmp = (week_t*) malloc(sizeof(week_t));
-     if(tmp){
-         strcpy(tmp->year,year);
-         tmp->weekNumber = weekNumber;
-         tmp->actionsList = initActions();
-         tmp->next = NULL;
-    }
-    return tmp;
-}
+////////////// INUTILE /////////////////
+// //Création d'une semaine avec une liste d'actions vide (POUR LES TESTS A ENLEVER SI BESOIN)
+// Diary createWeek(char *year, int weekNumber){
+//      printf("Je passe dans le createWeek\n");
+//      week_t* tmp = (week_t*) malloc(sizeof(week_t));
+//      if(tmp){
+//          strcpy(tmp->year,year);
+//          tmp->weekNumber = weekNumber;
+//          tmp->actionsList = initActions();
+//          tmp->next = NULL;
+//     }
+//     return tmp;
+// }
 
 // Insert en tête une semaine dans la liste des semaines en insérant une action
 void insertFirstWeekWithAction(Diary *d, char * year, int weekNumber,int day, int hour, char* name){
@@ -107,20 +102,20 @@ void insertFirstWeekWithAction(Diary *d, char * year, int weekNumber,int day, in
     }
 }
 
-
-// Insert en tête une semaine dans la liste des semaines (POUR LES TESTS A ENLEVER SI BESOIN)
-void insertFirstWeek(Diary *d, char * year, int weekNumber){
-    week_t *tmp = createWeek(year, weekNumber);
-    if(tmp){
-        if(!*d){
-            tmp->next = NULL;
-        }
-        else{
-            tmp->next = *d;
-        }
-        *d = tmp;
-    }
-}
+////////////// INUTILE /////////////////
+// // Insert en tête une semaine dans la liste des semaines (POUR LES TESTS A ENLEVER SI BESOIN)
+// void insertFirstWeek(Diary *d, char * year, int weekNumber){
+//     week_t *tmp = createWeek(year, weekNumber);
+//     if(tmp){
+//         if(!*d){
+//             tmp->next = NULL;
+//         }
+//         else{
+//             tmp->next = *d;
+//         }
+//         *d = tmp;
+//     }
+// }
 
 //Savoir si une liste est vide
 Boolean emptyDiary(Diary d){
