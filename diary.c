@@ -27,8 +27,6 @@ Diary initDiary(void){
 }
 
 void initDiaryWithFile(Diary *pd, char *fileName){
-    Diary d = *pd;
-    d = initDiary();
 
     char line[LINE_SIZE]="";
     char year[YEAR_SIZE]="", week[WEEK_SIZE]="", hour[HOUR_SIZE]="", name[ACTION_NAME_SIZE]="", day[DAY_SIZE]="";
@@ -37,17 +35,19 @@ void initDiaryWithFile(Diary *pd, char *fileName){
     if(file){
         while(fgets(line,LINE_SIZE,file)){
 
-            printf("Ligne: %s\n",line);
+            //printf("Ligne: %s\n",line);
 
             recupString(line,year,0,3);
             recupString(line,week,4,5);
             recupString(line,day,6,6);
             recupString(line,hour,7,8);
             recupString(line,name,9,strlen(line));
-            
-            printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Nom de l'action: %s\n",year, week, day, hour,name);
 
-            addWeek(&d,year,atoi(week),atoi(day),atoi(hour),name);
+            //printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Nom de l'action: %s\n",year, week, day, hour,name);
+
+            ////// PROBLÈME AVEC LA FORME DE name QUI N'EST PAS ACCEPTÉ PAR LA FONCTION ///////////
+            //addWeek(pd,year,atoi(week),atoi(day),atoi(hour),"TPs de SDD");
+            
 
             ////////////// INUTILE /////////////////
             // insertFirstWeek(&d,"2022",1);
@@ -136,7 +136,7 @@ int lengthDiary(Diary d){
 }
 
 // Ajout d'une nouvelle action selon l'année, la semaine, le jour et l'heure
-Boolean addWeek(Diary * pd,char * year, int weekNumber,int dayNumber, int hour, char *name){
+Boolean addWeek(Diary * pd,char * year, int weekNumber,int dayNumber, int hour, char name[]){
     Boolean code = TRUE; // indicateur d'erreur
     
     if(!*pd){

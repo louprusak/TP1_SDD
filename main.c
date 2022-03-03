@@ -11,9 +11,11 @@ int main(int argc, char **argv){
     Diary d = initDiary();
     patternList p;
 
-    char year[5];
-    char name[11];
-    int week,day,hour;
+    char year[YEAR_SIZE]="";
+    char name[ACTION_NAME_SIZE]="";
+    int week =0;
+    int day = 0;
+    int hour = 0;
 
     while(!quit){
 
@@ -42,6 +44,7 @@ int main(int argc, char **argv){
                 );
                 if(argv[1] != NULL){
                     initDiaryWithFile(&d,argv[1]);
+                    displayWeeksList(d);
                 }
                 else{
                     printf("Impossible car aucun fichier n'a été renseigné.\n\n");
@@ -116,19 +119,23 @@ int main(int argc, char **argv){
                 );
                 scanf("%s",filename);
                 printf("%s",filename);
-                d = initDiary();
 
-                insertFirstWeek(&d,"2022",1);
-                addAction(&d->actionsList, 5, atoi("08"),"Espagnol");
-                addAction(&d->actionsList, 1, atoi("08"),"BDD");
-                addAction(&d->actionsList, 5, atoi("10"),"Anglais");
-                addAction(&d->actionsList, 6, atoi("12"),"Manger");
+                
+                // d = initDiary();
 
+                // insertFirstWeek(&d,"2022",1);
+                // addAction(&d->actionsList, 5, atoi("08"),"Espagnol");
+                // addAction(&d->actionsList, 1, atoi("08"),"BDD");
+                // addAction(&d->actionsList, 5, atoi("10"),"Anglais");
+                // addAction(&d->actionsList, 6, atoi("12"),"Manger");
+
+                // displayWeeksList(d);
+                // printf("insertions OK\n");
+                
                 displayWeeksList(d);
-                printf("insertions OK\n");
-                displayWeeksList(d);
-                printf("Affichage OK\n");
+                // printf("Affichage OK\n");
                 saveDiary(d,filename);
+
                 break;
             case 6:
                 //Affichage de l'Agenda
