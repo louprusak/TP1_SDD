@@ -100,7 +100,8 @@ Boolean addAction(ActionsList *plist, int day,int hour, char *name){
                         code = FALSE;
                     } 
                     else {
-                        if (curr->next){
+                        // L'élément n'est pas le dernier de la liste ou alors il possède un jour plus grand que celui à placer
+                        if (curr->next || curr->dayNumber>day){
                             prec->next = tmp;
                             tmp->next = curr;
                         } else {
@@ -125,50 +126,63 @@ Boolean addAction(ActionsList *plist, int day,int hour, char *name){
     return code;
 }
 
+void supprFirstAction(ActionsList* plist){
+    Action_t* curr = *plist;
+    *plist=curr->next;
+    free(curr);
+}
 
-// //Renvoie vrai si la suppression est réussie
-// int supprAction (ActionsList list, int day, int hour, char name[]){
-//     ActionsList curr = list;
-//     int code = 1;
-//     if (list){
-//         ActionsList prec;
-//         while (curr!=NULL && curr->dayNumber < day){
-//             prec = curr;
-//             curr=curr->next;
-//         }
-//         if (curr->dayNumber == day){
-//             while (curr!=NULL && curr->hour < hour){
-//                 prec = curr;
-//                 curr=curr->next;
-//             }
-//         } else {
-//             code = 0;
-//         }
-//         if (curr->hour == hour && code){
-//             while (!strcmp(curr->actionName, name)){
-//                 prec = curr;
-//                 curr=curr->next;
-//             }
-//         } else{
-//             code = 0;
-//         }
-//         if (strcmp(curr->actionName, name) && code){
-//             prec->next=curr->next;
-//             free(curr);
-//         }
-//     }else {
-//         code = 0;
-//     }
-//     return code;
-// }
+Boolean supprAction (ActionsList* plist, int day, int hour, char name[]){
+    ActionsList prec = *plist;
+    ActionsList curr=prec;
+    Boolean code = TRUE;
+
+    // La liste est vide
+    if (!*plist){
+        code = FALSE;
+    }
+    else {
+        // On se déplace selon les jours
+        while (curr!=NULL && curr->dayNumber < day){
+            prec= curr;
+            curr=curr->next;
+        }
+        // Égalité sur le jour
+        if (curr->dayNumber==day){
+            // Déplacement selon l'heure
+            while (curr!=NULL && curr->dayNumber == day && curr->hour < hour){
+                prec = curr;
+                curr = curr->next;
+            }
+            // Vérification si il y a égalité de l'heure et du nom
+            if (curr->hour==hour && strcmp(curr->actionName, name)==0){
+                // Cas si l'élément à supprimer est le premier
+                if (curr == *plist){
+                    printf("Cas de l'élément en premier à supprimer\n");
+                    supprFirstAction(plist);
+                }
+                // On élimine l'élément après prec
+                else {
+                    prec->next = curr->next;
+                    free(curr);
+                }
+            // Dans tous les autres cas c'est que l'élément n'existe pas  donc on renvoit un code à FALSE
+            }
+            else {
+                code = FALSE;
+            }
+        }
+        else {
+            code = FALSE;
+        }
+    }
+    return code;
+}
 
 void displayActionsList(ActionsList list){
-    //printf("je passe dans le displayactions\n");
     while (list!= NULL)
     {
-        //printf("saucisse\n");
         printf("\t\t Jour %d à %02d h : %s\n",list->dayNumber, list->hour, list->actionName);
         list = list->next;
     }
-    //printf("\n");
 }

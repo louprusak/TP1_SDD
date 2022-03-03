@@ -39,7 +39,7 @@ typedef struct action{
 //---------------------------------------------------------------
 // Définition du type booléen personnalisé
 //---------------------------------------------------------------
-typedef enum {TRUE, FALSE} Boolean;
+typedef enum {FALSE, TRUE} Boolean;
 
 //-----------------------------------------------------------------
 // Fonctions
@@ -51,7 +51,8 @@ int lengthActions(ActionsList l);
 ActionsList createAction(int day, int hour, char * name);
 void insertFirstAction(ActionsList *d, int day, int hour, char * name);
 Boolean addAction(ActionsList *plist, int day,int hour, char *name);
-int supprAction (ActionsList list, int day, int hour, char name[]);
+void supprFirstAction(ActionsList* plist);
+Boolean supprAction (ActionsList* plist, int day, int hour, char name[]);
 void displayActionsList(ActionsList list);
 
 #endif

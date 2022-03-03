@@ -50,6 +50,8 @@ void insertFirstWeek(Diary *d, char *year, int weekNumber);
 Diary createWeekWithAction(char * year, int weekNumber,int day, int hour, char * name);
 void insertFirstWeekWithAction(Diary *d, char * year, int weekNumber,int day, int hour, char* name);
 Boolean addWeek(Diary * pd,char * year, int weekNumber,int dayNumber, int hour, char *name);
+void supprFirstWeek(Diary* pd);
+Boolean supprWeek(Diary * pd, char * year, int week, int day, int hour, char name[]);
 void displayWeeksList(Diary d);
 
 void removeBackSlashN(char *s);

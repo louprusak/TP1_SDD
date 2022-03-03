@@ -3,6 +3,7 @@
 //Programme principal
 int main(int argc, char **argv){
 
+
     int quit = 0;
     int answer = -1;
     int size = 0;
@@ -22,7 +23,7 @@ int main(int argc, char **argv){
             "\nChoisissez ce que vous voulez faire :\n"
             "\n\t1) Initialiser l'Agenda à partir du fichier texte passé en argument\n"
             "\t2) Ajouter une action dans l'Agenda\n"
-            "\t3) Supprimer une action de l'Agenda (WORK IN PROGRESS)\n"
+            "\t3) Supprimer une action de l'Agenda\n"
             "\t4) Obtenir la liste des jours avec actions contenant motif (WIP)\n"
             "\t5) Sauvegarder l'Agenda en fichier texte\n"
             "\t6) Afficher l'Agenda\n"
@@ -56,16 +57,42 @@ int main(int argc, char **argv){
                 printf("\nEntrer le jour : ");
                 scanf("%d", &day);
                 printf("\nEntrer l'heure : ");
-                scanf("%d", &day);
+                scanf("%d", &hour);
                 printf("\nEnetrer le nom de l'action: ");
                 scanf("%s", name);
                 printf("\n");
-                addWeek(&d,year,week,day,hour,name);
-                displayWeeksList(d);
+                if (addWeek(&d,year,week,day,hour,name)){
+                    displayWeeksList(d);
+                }
+                else{
+                    printf("Il y a déjà un élément à cette date.\n");
+                    displayWeeksList(d);
+                }
 
                 break;
             case 3:
                 //Supression d'une action de l'Agenda
+                printf("Entrer l'élément à supprimer: \n");
+                printf("Entrer l'année : ");
+                scanf("%s",year);
+                printf("\nEntrer la semaine :");
+                scanf("%d", &week);
+                printf("\nEntrer le jour : ");
+                scanf("%d", &day);
+                printf("\nEntrer l'heure : ");
+                scanf("%d", &hour);
+                printf("\nEnetrer le nom de l'action: ");
+                scanf("%s", name);
+                printf("\n");
+
+                if (supprWeek(&d,year,week,day,hour,name)){
+                    printf("L'élément a bien été supprimé.\n");
+                    displayWeeksList(d);
+                }
+                else {
+                    printf("L'élément n'existe pas\n");
+                    displayWeeksList(d);
+                }
                 break;
             case 4:
                 //Sous liste des jours avec actions contenant motifs
