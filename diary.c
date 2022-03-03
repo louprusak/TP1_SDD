@@ -302,7 +302,7 @@ void saveDiary(Diary d, char *filename){
     fclose(file);
 }
 
-void free (Diary d){
+void freeWeek (Diary d){
     Diary curr = d;
     Diary suiv = curr->next;
 
