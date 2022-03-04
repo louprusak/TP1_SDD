@@ -41,12 +41,12 @@ void initDiaryWithFile(Diary *pd, char *fileName){
             recupString(line,week,4,5);
             recupString(line,day,6,6);
             recupString(line,hour,7,8);
-            recupString(line,name,9,strlen(line));
+            recupString(line,name,9,strlen(line)-3);
 
             //printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Nom de l'action: %s\n",year, week, day, hour,name);
 
             ////// PROBLÈME AVEC LA FORME DE name QUI N'EST PAS ACCEPTÉ PAR LA FONCTION ///////////
-            //addWeek(pd,year,atoi(week),atoi(day),atoi(hour),"TPs de SDD");
+            addWeek(pd,year,atoi(week),atoi(day),atoi(hour),name);
             
 
             ////////////// INUTILE /////////////////
