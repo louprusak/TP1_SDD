@@ -1,10 +1,11 @@
 #include "diary.h"
 
+// Initialisation d'une liste d'action
 ActionsList initActions(void){
     return NULL;
 }
 
-// Creation of a new action
+// Création d'une case action
 ActionsList createAction(int day, int hour, char *name){
     ActionsList tmp = (ActionsList) malloc(sizeof(Action_t));
     if (tmp){
@@ -49,6 +50,7 @@ int lengthActions(ActionsList l){
     return i;
 }
 
+// Ajout d'une action à la liste
 // curr: pointeur de parcours de liste
 // prec : pointeur de l'élément précédant celui en cours de lecture
 Boolean addAction(ActionsList *plist, int day,int hour, char *name){
@@ -126,12 +128,14 @@ Boolean addAction(ActionsList *plist, int day,int hour, char *name){
     return code;
 }
 
+// Suppression du premier élément d'une liste d'action
 void supprFirstAction(ActionsList* plist){
     Action_t* curr = *plist;
     *plist=curr->next;
     free(curr);
 }
 
+// Supression d'une action
 Boolean supprAction (ActionsList* plist, int day, int hour, char name[]){
     ActionsList prec = *plist;
     ActionsList curr=prec;
@@ -179,6 +183,7 @@ Boolean supprAction (ActionsList* plist, int day, int hour, char name[]){
     return code;
 }
 
+// Affichage de la liste d'action
 void displayActionsList(ActionsList list){
     while (list!= NULL)
     {
@@ -187,13 +192,14 @@ void displayActionsList(ActionsList list){
     }
 }
 
+// Libération de la liste d'actions
 void freeActionsList (ActionsList list){
     ActionsList curr = list;
-    ActionsList suiv = curr->next;
+    ActionsList suiv = list;
 
     while (suiv!=NULL){
+        suiv=suiv->next;
         free(curr);
         curr=suiv;
-        suiv=suiv->next;
     }
 }

@@ -144,6 +144,7 @@ int main(int argc, char **argv){
             case 0:
                 printf("Fermeture du programme...\n");
                 quit = 1;
+                freeDiary(d);
                 break;
             default:
                 printf("Numéro incorrect veuillez ressaisir : ");
@@ -151,4 +152,5 @@ int main(int argc, char **argv){
                 break;
         }
     }
+
 }

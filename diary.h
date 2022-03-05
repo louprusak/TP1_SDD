@@ -56,7 +56,7 @@ Boolean addWeek(Diary * pd,char * year, int weekNumber,int dayNumber, int hour, 
 void supprFirstWeek(Diary* pd);
 Boolean supprWeek(Diary * pd, char * year, int week, int day, int hour, char name[]);
 void displayWeeksList(Diary d);
-void freeWeek (Diary d);
+void freeDiary (Diary d);
 
 void removeBackSlashN(char *s);
 void recupString(char* e, char*s, int debut,int fin);

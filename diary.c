@@ -26,6 +26,7 @@ Diary initDiary(void){
     return NULL;
 }
 
+// Lecture de l'agenda dans un fichier
 void initDiaryWithFile(Diary *pd, char *fileName){
 
     char line[LINE_SIZE]="";
@@ -302,16 +303,15 @@ void saveDiary(Diary d, char *filename){
     fclose(file);
 }
 
-void freeWeek (Diary d){
+// Libération de la liste des semaines
+void freeDiary (Diary d){
     Diary curr = d;
-    Diary suiv = curr->next;
+    Diary suiv = d;
 
     while (suiv!=NULL){
+        suiv=suiv->next;
         freeActionsList(curr->actionsList);
         free(curr);
         curr=suiv;
-        suiv=suiv->next;
     }
 }
-
-//Ajout dans les listes
