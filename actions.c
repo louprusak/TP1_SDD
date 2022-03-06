@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------*/
+/* ********************* FICHIER ACTIONS *************************/
+/* Fichier contenant les fonctions nécessaires                   */
+/* pour la gestion des actions à réaliser par semaines.          */
+/*****************************************************************/
+/*---------------------------------------------------------------*/
+
 #include "diary.h"
 
 // Initialisation d'une liste d'action
