@@ -157,8 +157,8 @@ int main(int argc, char **argv){
                 freeDiary(d);
                 break;
             default:
-                printf("\nNuméro incorrect veuillez ressaisir : \n");
-                // scanf("%d",&answer);
+                printf("--> Numéro incorrect veuillez ressaisir : ");
+                scanf("%d",&answer);
                 break;
         }
     }
