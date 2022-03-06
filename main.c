@@ -4,6 +4,7 @@
 int main(int argc, char **argv){
 
 
+
     int quit = 0;
     int answer = -1;
     int size = 0;
@@ -17,12 +18,20 @@ int main(int argc, char **argv){
     int day = 0;
     int hour = 0;
 
+    // printf("Entrer le nom de l'action : ");
+    // fgets(name,ACTION_NAME_SIZE,stdin);
+    // printf("%s",name);
+
+    printf("\n#############################################################################\n"
+            "# Bonjour et bienvenue sur votre système personnalisé de gestion d'Agenda ! #\n"
+            "#############################################################################\n");
+
     while(!quit){
 
-        printf("\n#############################################################################\n"
-            "# Bonjour et bienvenue sur votre système personnalisé de gestion d'Agenda ! #\n"
-            "#############################################################################\n"
-            "\nChoisissez ce que vous voulez faire :\n"
+        // printf("\n#############################################################################\n"
+        //     "# Bonjour et bienvenue sur votre système personnalisé de gestion d'Agenda ! #\n"
+        //     "#############################################################################\n");
+        printf("\nChoisissez ce que vous voulez faire :\n"
             "\n\t1) Initialiser l'Agenda à partir du fichier texte passé en argument\n"
             "\t2) Ajouter une action dans l'Agenda\n"
             "\t3) Supprimer une action de l'Agenda\n"
@@ -61,17 +70,17 @@ int main(int argc, char **argv){
                 scanf("%d", &day);
                 printf("\nEntrer l'heure : ");
                 scanf("%d", &hour);
-                printf("\nEnetrer le nom de l'action: ");
-                scanf("%s", name);
+                printf("\nEnetrer le nom de l'action : ");
+                // Utilisation du fgets ??
+                fgets(name,ACTION_NAME_SIZE,stdin);
                 printf("\n");
                 if (addWeek(&d,year,week,day,hour,name)){
                     displayWeeksList(d);
                 }
-                else{
+                else {
                     printf("Il y a déjà un élément à cette date.\n");
                     displayWeeksList(d);
                 }
-
                 break;
             case 3:
                 //Supression d'une action de l'Agenda
@@ -85,7 +94,8 @@ int main(int argc, char **argv){
                 printf("\nEntrer l'heure : ");
                 scanf("%d", &hour);
                 printf("\nEnetrer le nom de l'action: ");
-                scanf("%s", name);
+                // ICI AUSSI
+                //scanf("%s", name);
                 printf("\n");
 
                 if (supprWeek(&d,year,week,day,hour,name)){
@@ -147,8 +157,8 @@ int main(int argc, char **argv){
                 freeDiary(d);
                 break;
             default:
-                printf("Numéro incorrect veuillez ressaisir : ");
-                scanf("%d",&answer);
+                printf("\nNuméro incorrect veuillez ressaisir : \n");
+                // scanf("%d",&answer);
                 break;
         }
     }

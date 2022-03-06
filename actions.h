@@ -15,7 +15,7 @@
 // Constantes
 //-----------------------------------------------------------------
 
-#define ACTION_NAME_SIZE 10
+#define ACTION_NAME_SIZE 11
 #define DAY_SIZE 2
 #define HOUR_SIZE 3
 
