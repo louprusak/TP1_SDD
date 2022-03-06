@@ -1,3 +1,10 @@
+/*---------------------------------------------------------------*/
+/* ***************** FICHIER PRINCIPAL (MAIN) ********************/
+/* Fichier principal contenant la gestion du menu et des actions */
+/* pour la gestion de l'Agenda et des actions.                   */
+/*****************************************************************/
+/*---------------------------------------------------------------*/
+
 #include "diary.h"
 
 //Programme principal
@@ -42,7 +49,7 @@ int main(int argc, char **argv){
                 printf("___________________________________________________________\n"
                         "1) Initialisation de l'Agenda à partir du fichier texte passé en Argument. \n"
                 );
-                if(argv[1] != NULL){
+                if(argc != 00 && argv[1] != NULL){
                     initDiaryWithFile(&d,argv[1]);
                     displayWeeksList(d);
                 }
@@ -139,15 +146,20 @@ int main(int argc, char **argv){
                 break;
             case 6:
                 //Affichage de l'Agenda
-                displayWeeksList(d);
+                if(d){
+                    displayWeeksList(d);
+                }
+                else{
+                    printf("--> L'agenda est vide.\n");
+                }
                 break;
             case 0:
-                printf("Fermeture du programme...\n");
+                printf("--> Fermeture du programme...\n");
                 quit = 1;
                 freeDiary(d);
                 break;
             default:
-                printf("Numéro incorrect veuillez ressaisir : ");
+                printf("--> Numéro incorrect veuillez ressaisir : ");
                 scanf("%d",&answer);
                 break;
         }
