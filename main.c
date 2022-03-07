@@ -52,7 +52,7 @@ int main(int argc, char **argv){
         {
             case 1:
                 //Initialisation de l'Agenda à partir d'un fichier .txt
-                printf("____________________________________________________________________________\n"
+                printf("_____________________________________________________________________________\n"
                         "1) Initialisation de l'Agenda à partir du fichier texte passé en Argument. \n"
                 );
                 if(argc != 00 && argv[1] != NULL){
@@ -65,7 +65,9 @@ int main(int argc, char **argv){
                 break;
             case 2:
                 //Ajout d'une action dans l'Agenda
-
+                printf("_____________________________________________________________________________\n"
+                        "2) Ajout d'une action dans l'Agenda. \n"
+                );
                 printf("Entrer l'année : ");
                 scanf("%s",year);
                 printf("\nEntrer la semaine :");
@@ -73,7 +75,7 @@ int main(int argc, char **argv){
                 printf("\nEntrer le jour : ");
                 scanf("%d", &day);
                 printf("\nEntrer l'heure : ");
-                scanf("%d", &hour);
+                scanf("%d%*c", &hour);
                 printf("\nEnetrer le nom de l'action : ");
                 // Utilisation du fgets ??
                 fgets(name,ACTION_NAME_SIZE,stdin);
@@ -88,6 +90,9 @@ int main(int argc, char **argv){
                 break;
             case 3:
                 //Supression d'une action de l'Agenda
+                printf("_____________________________________________________________________________\n"
+                        "3) Suppression d'une action dans l'Agenda. \n"
+                );
                 printf("Entrer l'élément à supprimer: \n");
                 printf("Entrer l'année : ");
                 scanf("%s",year);
@@ -113,7 +118,7 @@ int main(int argc, char **argv){
                 break;
             case 4:
                 //Sous liste des jours avec actions contenant motifs
-                printf("___________________________________________________________\n"
+                printf("_____________________________________________________________________________\n"
                         "4) Sauvegarde de l'Agenda en fichier texte. \n"
                         "\nVeuillez entrer une taille pour la liste : "
                 );
@@ -127,7 +132,7 @@ int main(int argc, char **argv){
                 break;
             case 5:
                 //Sauvegarde de l'Agenda
-                printf("___________________________________________________________\n"
+                printf("_____________________________________________________________________________\n"
                         "5) Sauvegarde de l'Agenda en fichier texte. \n"
                         "\nVeuillez enter le nom du fichier pour la sauvegarde : "
                 );
