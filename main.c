@@ -35,9 +35,6 @@ int main(int argc, char **argv){
 
     while(!quit){
 
-        // printf("\n#############################################################################\n"
-        //     "# Bonjour et bienvenue sur votre système personnalisé de gestion d'Agenda ! #\n"
-        //     "#############################################################################\n");
         printf("\nChoisissez ce que vous voulez faire :\n"
             "\n\t1) Initialiser l'Agenda à partir du fichier texte passé en argument\n"
             "\t2) Ajouter une action dans l'Agenda\n"
@@ -55,7 +52,7 @@ int main(int argc, char **argv){
         {
             case 1:
                 //Initialisation de l'Agenda à partir d'un fichier .txt
-                printf("___________________________________________________________\n"
+                printf("____________________________________________________________________________\n"
                         "1) Initialisation de l'Agenda à partir du fichier texte passé en Argument. \n"
                 );
                 if(argc != 00 && argv[1] != NULL){
@@ -164,13 +161,15 @@ int main(int argc, char **argv){
                 }
                 break;
             case 0:
+                //Fermeture du programme
                 printf("--> Fermeture du programme...\n");
                 quit = 1;
                 freeDiary(d);
                 break;
             default:
-                printf("--> Numéro incorrect veuillez ressaisir : ");
-                scanf("%d",&answer);
+                //Traitement d'un numéro incorrect
+                printf("--> Numéro incorrect veuillez ressaisir.\n");
+                fflush(stdin);
                 break;
         }
     }
