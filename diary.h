@@ -1,4 +1,5 @@
-/* ***************** FICHIER ENTETE AGENDA (DIARY) ************** /
+/*---------------------------------------------------------------*/
+/* ***************** FICHIER ENTETE AGENDA (DIARY) ***************/
 /* Fichier contenant la structure de liste chainée nécessaire    */
 /* pour la gestion de l'Agenda                                   */
 /*****************************************************************/
