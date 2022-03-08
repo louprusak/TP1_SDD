@@ -32,8 +32,8 @@
 /*---------------------------------------------------------------*/
 
 typedef struct week{
-    char year[5];
-    int weekNumber;
+    char year[YEAR_SIZE];
+    char weekNumber[WEEK_SIZE];
     ActionsList actionsList;
     struct week *next;
 }week_t, *Diary;
@@ -53,11 +53,12 @@ int lengthDiary(Diary d);
 // Diary createWeek(char *year, int weekNumber);
 // void insertFirstWeek(Diary *d, char *year, int weekNumber);
 
-Diary createWeekWithAction(char * year, int weekNumber,int day, int hour, char * name);
-void insertFirstWeekWithAction(Diary *d, char * year, int weekNumber,int day, int hour, char* name);
-Boolean addWeek(Diary * pd,char * year, int weekNumber,int dayNumber, int hour, char *name);
+Diary createWeekWithAction(char * year, char * weekNumber,int day, int hour, char * name);
+void insertFirstWeekWithAction(Diary *d, char * year, char * weekNumber,int day, int hour, char* name);
+Boolean addWeek(Diary * pd,char * year, char * weekNumber,int dayNumber, int hour, char *name);
+void findPattern(Diary d, patternList_t *ppl, char *pattern);
 void supprFirstWeek(Diary* pd);
-Boolean supprWeek(Diary * pd, char * year, int week, int day, int hour, char name[]);
+Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour, char name[]);
 void displayWeeksList(Diary d);
 void freeDiary (Diary d);
 

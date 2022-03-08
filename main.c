@@ -17,11 +17,13 @@ int main(int argc, char **argv){
     int size = 0;
     char filename[FILENAME_SIZE];
     Diary d = initDiary();
-    patternList p;
+    patternList_t pl;
+    initPattern(&pl);
 
     char year[YEAR_SIZE]="";
     char name[ACTION_NAME_SIZE]="";
-    int week =0;
+    char week[WEEK_SIZE]="";
+    char pattern[11] = "";
     int day = 0;
     int hour = 0;
 
@@ -71,12 +73,12 @@ int main(int argc, char **argv){
                 printf("Entrer l'année : ");
                 scanf("%s",year);
                 printf("\nEntrer la semaine :");
-                scanf("%d", &week);
+                scanf("%s", week);
                 printf("\nEntrer le jour : ");
                 scanf("%d", &day);
                 printf("\nEntrer l'heure : ");
                 scanf("%d%*c", &hour);
-                printf("\nEnetrer le nom de l'action : ");
+                printf("\nEntrer le nom de l'action : ");
                 // Utilisation du fgets ??
                 fgets(name,ACTION_NAME_SIZE,stdin);
                 printf("\n");
@@ -97,14 +99,13 @@ int main(int argc, char **argv){
                 printf("Entrer l'année : ");
                 scanf("%s",year);
                 printf("\nEntrer la semaine :");
-                scanf("%d", &week);
+                scanf("%s", week);
                 printf("\nEntrer le jour : ");
                 scanf("%d", &day);
                 printf("\nEntrer l'heure : ");
-                scanf("%d", &hour);
-                printf("\nEnetrer le nom de l'action: ");
-                // ICI AUSSI
-                //scanf("%s", name);
+                scanf("%d%*c", &hour);
+                printf("\nEntrer le nom de l'action: ");
+                fgets(name,ACTION_NAME_SIZE,stdin);
                 printf("\n");
 
                 if (supprWeek(&d,year,week,day,hour,name)){
@@ -119,15 +120,21 @@ int main(int argc, char **argv){
             case 4:
                 //Sous liste des jours avec actions contenant motifs
                 printf("_____________________________________________________________________________\n"
-                        "4) Sauvegarde de l'Agenda en fichier texte. \n"
-                        "\nVeuillez entrer une taille pour la liste : "
+                        "4) Rechercher un motif d'action dans l'agenda. \n"
+                        "\nVeuillez entrer le motif à rechercher : "
                 );
-                scanf("%d",&size);
-                initPattern(&p,size);
+                fflush(stdin);
+                fgets(pattern,11, stdin);
+                printf("%s\n",pattern);
+                //removeBackSlashN(pattern);
+                initPattern(&pl);
                     printf("Initpattern ok\n");
-                displayPattern(p,size);
+
+                findPattern(d,&pl,pattern);
+                    printf("find patern OK\n");
+                displayPattern(pl);
                     printf("Display pattern ok \n");
-                freePattern(&p);
+                freePattern(&pl);
                     printf("Free pattern ok\n");
                 break;
             case 5:
@@ -151,7 +158,7 @@ int main(int argc, char **argv){
                 // displayWeeksList(d);
                 // printf("insertions OK\n");
                 
-                displayWeeksList(d);
+                //displayWeeksList(d);
                 // printf("Affichage OK\n");
                 saveDiary(d,filename);
 
