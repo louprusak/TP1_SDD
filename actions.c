@@ -7,12 +7,27 @@
 
 #include "diary.h"
 
-// Initialisation d'une liste d'action
+/* -------------------------------------------------------------------- */
+/* initActions      Initialise la liste d'action                        */
+/*                                                                      */
+/* En entrée: void                                                      */
+/*                                                                      */
+/* En sortie: NULL                                                      */
+/* -------------------------------------------------------------------- */
+
 ActionsList initActions(void){
     return NULL;
 }
 
-// Création d'une case action
+/* -------------------------------------------------------------------- */
+/* createAction      Création d'une case action                         */
+/*                                                                      */
+/* En entrée: day et hour les valeurs du jour et de l'heure             */
+/*           et name la chaîne de caractère contenant le nom de l'action*/
+/*                                                                      */
+/* En sortie: tmp une case action                                       */
+/* -------------------------------------------------------------------- */
+
 ActionsList createAction(int day, int hour, char *name){
     ActionsList tmp = (ActionsList) malloc(sizeof(Action_t));
     if (tmp){
@@ -24,30 +39,53 @@ ActionsList createAction(int day, int hour, char *name){
     return tmp;
 }
 
+/* --------------------------------------------------------------------------- */
+/* insertFirstAction    Insert en tête d'une action dans la liste des actions  */
+/*                                                                             */
+/* En entrée: plist le pointeur de pointeur tête de la liste des actions       */
+/*             day et hour les valeurs du jour et de l'heure                   */
+/*            name la chaîne de caractère contenant le nom de l'action         */
+/*                                                                             */
+/* En sortie: void                                                             */
+/* --------------------------------------------------------------------------- */
 
-// Insert en tête d'une action dans la liste des actions
-void insertFirstAction(ActionsList *d, int day, int hour, char * name){
+void insertFirstAction(ActionsList *plist, int day, int hour, char * name){
     Action_t *tmp = createAction(day, hour, name);
     if(tmp){
-        if(!*d){
+        if(!*plist){
             tmp->next = NULL;
         }
         else{
-            tmp->next = *d;
+            tmp->next = *plist;
         }
-        *d = tmp;
+        *plist = tmp;
     }
 }
 
-//Savoir si une liste est vide
+/* -------------------------------------------------------------------------- */
+/* emptyActions    Vérifie si la liste des actions est vide                   */
+/*                                                                            */
+/* En entrée: list le pointeur de la tête de la liste de l'agenda             */
+/*                                                                            */
+/* En sortie: TRUE si la liste est vide, FALSE sinon                          */
+/* -------------------------------------------------------------------------- */
+
 Boolean emptyActions(ActionsList l){
+    Boolean code = FALSE;
     if (l == NULL){
-        return TRUE;
+        code = TRUE;
     }
-    return FALSE;
+    return code;
 }
 
-//Connaitre la longueur de la liste
+/* -------------------------------------------------------------------------- */
+/* lengthActions    Connaitre la longueur de la liste                         */
+/*                                                                            */
+/* En entrée: list le pointeur qui pointe sur la tête de la liste de l'agenda */
+/*                                                                            */
+/* En sortie: la longeur de la liste                                          */
+/* -------------------------------------------------------------------------- */
+
 int lengthActions(ActionsList l){
     int i = 0;
     while(!emptyActions(l)){
@@ -57,7 +95,16 @@ int lengthActions(ActionsList l){
     return i;
 }
 
-// Ajout d'une action à la liste
+/* -------------------------------------------------------------------------- */
+/* addAction    Ajout d'une action à la liste                                 */
+/*                                                                            */
+/* En entrée: plist le pointeur du pointeur tête de la liste des actions      */
+/*             day et hour les valeurs du jour et de l'heure                  */
+/*            name la chaîne de caractère contenant le nom de l'action        */
+/*                                                                            */
+/* En sortie: TRUE si l'action a pu être ajoutée, FALSE sinon                 */
+/* -------------------------------------------------------------------------- */
+
 // curr: pointeur de parcours de liste
 // prec : pointeur de l'élément précédant celui en cours de lecture
 Boolean addAction(ActionsList *plist, int day,int hour, char *name){
@@ -135,14 +182,30 @@ Boolean addAction(ActionsList *plist, int day,int hour, char *name){
     return code;
 }
 
-// Suppression du premier élément d'une liste d'action
+/* -------------------------------------------------------------------------- */
+/* supprFirstAction    Suppression du premier élément d'une liste d'action    */
+/*                                                                            */
+/* En entrée: plist le pointeur du le pointeur tête de la liste de l'agenda   */
+/*                                                                            */
+/* En sortie: void                                                            */
+/* -------------------------------------------------------------------------- */
+
 void supprFirstAction(ActionsList* plist){
     Action_t* curr = *plist;
     *plist=curr->next;
     free(curr);
 }
 
-// Supression d'une action
+/* -------------------------------------------------------------------------- */
+/* supprAction    Supression d'une action                                     */
+/*                                                                            */
+/* En entrée: plist le pointeur du pointeur tête de la liste des actions      */
+/*             day et hour les valeurs du jour et de l'heure                  */
+/*            name la chaîne de caractère contenant le nom de l'action        */
+/*                                                                            */
+/* En sortie: TRUE si l'action a pu être supprimée, FALSE sinon               */
+/* -------------------------------------------------------------------------- */
+
 Boolean supprAction (ActionsList* plist, int day, int hour, char name[]){
     ActionsList prec = *plist;
     ActionsList curr=prec;
@@ -190,7 +253,14 @@ Boolean supprAction (ActionsList* plist, int day, int hour, char name[]){
     return code;
 }
 
-// Affichage de la liste d'action
+/* -------------------------------------------------------------------------- */
+/* displayActionsList    Affichage de la liste d'action                       */
+/*                                                                            */
+/* En entrée: list le pointeur qui pointe sur la tête de la liste de l'agenda */
+/*                                                                            */
+/* En sortie: void                                                            */
+/* -------------------------------------------------------------------------- */
+
 void displayActionsList(ActionsList list){
     while (list!= NULL)
     {
@@ -199,7 +269,14 @@ void displayActionsList(ActionsList list){
     }
 }
 
-// Libération de la liste d'actions
+/* -------------------------------------------------------------------------- */
+/* freeActionsList    Libération de la liste d'actions                        */
+/*                                                                            */
+/* En entrée: list le pointeur qui pointe sur la tête de la liste d'action    */
+/*                                                                            */
+/* En sortie: void                                                            */
+/* -------------------------------------------------------------------------- */
+
 void freeActionsList (ActionsList list){
     ActionsList curr = list;
     ActionsList suiv = list;
