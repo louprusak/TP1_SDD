@@ -28,12 +28,27 @@
 //     }
 // }
 
-//Initialisation de la liste des semaines (Agenda)
+/* -------------------------------------------------------------------- */
+/* initDiary        Initialisation de la liste des semaines (Agenda)    */
+/*                                                                      */
+/* En entrée: void                                                      */
+/*                                                                      */
+/* En sortie: NULL                                                      */
+/* -------------------------------------------------------------------- */
+
 Diary initDiary(void){
     return NULL;
 }
 
-// Lecture de l'agenda dans un fichier
+/* -------------------------------------------------------------------- */
+/* initDiaryWithFile      Lecture de l'agenda dans un fichier           */
+/*                                                                      */
+/* En entrée: pd le pointeur qui pointe sur la tête de la liste chainée */
+/*            filename le nom du fichier à lire                         */
+/*                                                                      */
+/* En sortie: void                                                      */
+/* -------------------------------------------------------------------- */
+
 void initDiaryWithFile(Diary *pd, char *fileName){
 
     char line[LINE_SIZE]="";
@@ -69,6 +84,15 @@ void initDiaryWithFile(Diary *pd, char *fileName){
     }
     fclose(file);
 }
+/* ----------------------------------------------------------------------------------- */
+/* createWeekWithAction  Création d'une semaine avec une action insérée                */
+/*                                                                                     */
+/* En entrée: year la chaine de caractère donnant l'année                              */
+/*            weekNumber, day et hour les valeurs de la semaine, du jour et de l'heure */
+/*           et name la chaîne de caractère contenant le nom de l'action               */
+/*                                                                                     */
+/* En sortie: tmp une case semaine                                                     */
+/* ----------------------------------------------------------------------------------- */
 
 //Création d'une semaine avec une action insérée
 Diary createWeekWithAction(char * year, char *weekNumber,int day, int hour, char * name){
@@ -98,7 +122,19 @@ Diary createWeekWithAction(char * year, char *weekNumber,int day, int hour, char
 //     return tmp;
 // }
 
-// Insert en tête une semaine dans la liste des semaines en insérant une action
+
+/* ----------------------------------------------------------------------------------- */
+/* insertFirstWeekWithAction  Insert en tête une semaine dans la liste des semaines en */
+/*                            insérant une action                                      */
+/*                                                                                     */
+/* En entrée: d le pointeur de tête de l'agenda                                        */
+/*            year la chaine de caractère donnant l'année                              */
+/*            weekNumber, day et hour les valeurs de la semaine, du jour et de l'heure */
+/*           et name la chaîne de caractère contenant le nom de l'action               */
+/*                                                                                     */
+/* En sortie: void                                                                     */
+/* ----------------------------------------------------------------------------------- */
+
 void insertFirstWeekWithAction(Diary *d, char * year, char *weekNumber,int day, int hour, char* name){
     week_t *tmp = createWeekWithAction(year, weekNumber, day, hour, name);
     if(tmp){
@@ -127,15 +163,30 @@ void insertFirstWeekWithAction(Diary *d, char * year, char *weekNumber,int day, 
 //     }
 // }
 
-//Savoir si une liste est vide
+/* -------------------------------------------------------------------- */
+/* emptyDiary        Savoir si une liste est vide                       */
+/*                                                                      */
+/* En entrée: d le pointeur de tête de l'agenda                         */
+/*                                                                      */
+/* En sortie: TRUE si l'agenda est vide, FALSE sinon                    */
+/* -------------------------------------------------------------------- */
+
 Boolean emptyDiary(Diary d){
+    Boolean code = FALSE;
     if (d == NULL){
-        return TRUE;
+        code = TRUE;
     }
-    return FALSE;
+    return code;
 }
 
-//Connaitre la longueur de la liste
+/* -------------------------------------------------------------------- */
+/* lengthDiary        Connaitre la longueur de la liste                 */
+/*                                                                      */
+/* En entrée: d le pointeur de tête de l'agenda                         */
+/*                                                                      */
+/* En sortie: la longueur de l'agenda d                                 */
+/* -------------------------------------------------------------------- */
+
 int lengthDiary(Diary d){
     int i = 0;
     while(!emptyDiary(d)){
@@ -144,6 +195,17 @@ int lengthDiary(Diary d){
     }
     return i;
 }
+
+/* ----------------------------------------------------------------------------------- */
+/* addWeek  Ajout d'une nouvelle action selon l'année, la semaine, le jour et l'heure  */
+/*                                                                                     */
+/* En entrée: pd le pointeur qui pointe sur le pointeur tête de l'agenda               */
+/*            year la chaine de caractère donnant l'année                              */
+/*            weekNumber, day et hour les valeurs de la semaine, du jour et de l'heure */
+/*           et name la chaîne de caractère contenant le nom de l'action               */
+/*                                                                                     */
+/* En sortie: void                                                                     */
+/* ----------------------------------------------------------------------------------- */
 
 // Ajout d'une nouvelle action selon l'année, la semaine, le jour et l'heure
 Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hour, char name[]){
@@ -244,18 +306,34 @@ void findPattern(Diary d, patternList_t *ppl, char *pattern){
     
 } 
 
+/* -------------------------------------------------------------------- */
+/* supprFirstWeek  Suppression du premier élément d'une liste           */
+/*                    de type Diary                                     */
+/*                                                                      */
+/* En entrée: pd le pointeur qui pointe sur la tête de la liste chainée */
+/*                                                                      */
+/* En sortie: void                                                      */
+/* -------------------------------------------------------------------- */
 
-// Suppression du premier élément d'une liste de type Diary
 void supprFirstWeek(Diary* pd){
     Diary curr=*pd;
     *pd=(curr)->next;
     free(curr);
 }
 
-// Suppression d'un élément de l'agenda
-Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour, char name[]){
 
-    printf("j'entre dans le supprweek\n");
+/* ----------------------------------------------------------------------------------- */
+/* supprWeek                   Suppression d'un élément de l'agenda                    */
+/*                                                                                     */
+/* En entrée: pd le pointeur qui pointe sur le pointeur tête de l'agenda               */
+/*            year la chaine de caractère donnant l'année                              */
+/*            weekNumber, day et hour les valeurs de la semaine, du jour et de l'heure */
+/*           et name la chaîne de caractère contenant le nom de l'action               */
+/*                                                                                     */
+/* En sortie: TRUE si la suppression est faite, FALSE sinon                            */
+/* ----------------------------------------------------------------------------------- */
+
+Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour, char name[]){
 
     Boolean code = TRUE;
 
@@ -314,8 +392,14 @@ Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour, char 
 }
 
 
+/* -------------------------------------------------------------------- */
+/* displayWeeksList        Affiche la liste des semaines (Agenda)       */
+/*                                                                      */
+/* En entrée: d le pointeur de tête de l'agenda                         */
+/*                                                                      */
+/* En sortie: void                                                      */
+/* -------------------------------------------------------------------- */
 
-//Affiche la liste des semaines (Agenda)
 void displayWeeksList(Diary d){
     printf("Agenda :\n");
     while (d != NULL)
@@ -327,7 +411,15 @@ void displayWeeksList(Diary d){
     printf("\n");
 }
 
-//Sauvegarde de l'Agenda dans un fichier texte
+/* -------------------------------------------------------------------- */
+/* saveDiary      Sauvegarde de l'Agenda dans un fichier texte          */
+/*                                                                      */
+/* En entrée: pd le pointeur qui pointe sur la tête de la liste chainée */
+/*            filename le nom du fichier à lire                         */
+/*                                                                      */
+/* En sortie: void                                                      */
+/* -------------------------------------------------------------------- */
+
 void saveDiary(Diary d, char *filename){
     //printf("Je passe dans le save\n");
     if(d){
@@ -353,6 +445,14 @@ void saveDiary(Diary d, char *filename){
     }
     
 }
+
+/* -------------------------------------------------------------------------- */
+/* freeDiary    Libération de la liste des semaines                           */
+/*                                                                            */
+/* En entrée: d le pointeur qui pointe sur la tête de la liste de l'agenda    */
+/*                                                                            */
+/* En sortie: void                                                            */
+/* -------------------------------------------------------------------------- */
 
 // Libération de la liste des semaines
 void freeDiary (Diary d){
