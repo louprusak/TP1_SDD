@@ -285,8 +285,9 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
 
 //Rechercher un motif et créer une liste des jours qui l'ont
 void findPattern(Diary d, patternList_t *ppl, char *pattern){
+            //printf("FIND PATTERN : Tete et queue: %d %d\n",ppl->head,ppl->tail);
+
     if(d){
-        int tabsize = 0;
         char *result = NULL;
         ActionsList al = NULL;
         while (d != NULL)
@@ -294,9 +295,16 @@ void findPattern(Diary d, patternList_t *ppl, char *pattern){
             al = d->actionsList;
             while(al != NULL)
             {
-                result = strstr(d->actionsList->actionName,pattern);
+                result = strstr(al->actionName,pattern);
+                //printf("FIND PATTERN : -%s- -%s-\n",al->actionName,pattern);
                 if(result){
-                    addDay(ppl, &tabsize, d->year, d->weekNumber, al->dayNumber, al->hour, al->actionName);
+                    
+                    //printf("FIND PATTERN : result trouvé\n");
+                    addDay(ppl, d->year, d->weekNumber, al->dayNumber, al->hour, al->actionName);
+                    //printf("FIND PATTERN : Add Action ok\n");
+                }
+                else{
+                    //printf("FIND PATTERN : Pas trouvé\n");
                 }
                 al = al->next;
             }

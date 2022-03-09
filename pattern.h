@@ -48,9 +48,10 @@ typedef struct{
 /* Fonctions                                                     */
 /*---------------------------------------------------------------*/
 
-void initPattern(patternList_t *ppl);
+patternList_t * initPattern();
 void displayPattern(patternList_t pl);
-void addDay(patternList_t *ppl, int *tabsize, char * year, char * week, int day, int hour, char *actionName);
+void addDay(patternList_t *ppl, char * year, char * week, int day, int hour, char *actionName);
 void freePattern(patternList_t *ppl);
+void affichage_action_motif(patternList_t pl);
 
 #endif

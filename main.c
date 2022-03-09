@@ -17,8 +17,7 @@ int main(int argc, char **argv){
     int size = 0;
     char filename[FILENAME_SIZE];
     Diary d = initDiary();
-    patternList_t pl;
-    initPattern(&pl);
+    patternList_t *pl;
 
     char year[YEAR_SIZE]="";
     char name[ACTION_NAME_SIZE]="";
@@ -48,7 +47,7 @@ int main(int argc, char **argv){
             "\nVeuillez indiquer votre choix en tapant le numéro associé sur votre clavier : "
             );
 
-        scanf("%d",&answer);
+        scanf("%d%*c",&answer);
 
         switch (answer)
         {
@@ -123,19 +122,18 @@ int main(int argc, char **argv){
                         "4) Rechercher un motif d'action dans l'agenda. \n"
                         "\nVeuillez entrer le motif à rechercher : "
                 );
-                fflush(stdin);
                 fgets(pattern,11, stdin);
-                printf("%s\n",pattern);
-                //removeBackSlashN(pattern);
-                initPattern(&pl);
-                    printf("Initpattern ok\n");
+                removeBackSlashN(pattern);
+                pl = initPattern();
+                //printf("Initpattern ok\n");
+                //printf("Tete et queu test qui va pas marcher %d %d\n",pl->head,pl->tail);
 
-                findPattern(d,&pl,pattern);
-                    printf("find patern OK\n");
-                displayPattern(pl);
-                    printf("Display pattern ok \n");
-                freePattern(&pl);
-                    printf("Free pattern ok\n");
+                findPattern(d,pl,pattern);
+                //printf("find patern OK\n");
+                displayPattern(*pl);
+                //printf("Display pattern ok \n");
+                //freePattern(&pl);
+                //printf("Free pattern ok\n");
                 break;
             case 5:
                 //Sauvegarde de l'Agenda
