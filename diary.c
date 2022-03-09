@@ -47,6 +47,14 @@ Diary initDiary(void){
 /*            filename le nom du fichier à lire                         */
 /*                                                                      */
 /* En sortie: void                                                      */
+/*                                                                      */
+/* Variables locales: line : ligne en cours de lecture dans le fichier  */
+/*            year: valeur de l'année de la ligne                       */
+/*            week: valeur du numéro de la semaine de la ligne          */
+/*            day: valeur de la journée de la ligne                     */
+/*            hour: valeur de l'heure de la ligne                       */
+/*            name: nom de l'action de la ligne                         */
+/*            file: fichier en cours de lecture                         */
 /* -------------------------------------------------------------------- */
 
 void initDiaryWithFile(Diary *pd, char *fileName){
@@ -133,6 +141,8 @@ Diary createWeekWithAction(char * year, char *weekNumber,int day, int hour, char
 /*           et name la chaîne de caractère contenant le nom de l'action               */
 /*                                                                                     */
 /* En sortie: void                                                                     */
+/*                                                                                     */
+/* Variables locales: tmp : case créée à rajouter au début de la liste                 */
 /* ----------------------------------------------------------------------------------- */
 
 void insertFirstWeekWithAction(Diary *d, char * year, char *weekNumber,int day, int hour, char* name){
@@ -200,11 +210,16 @@ int lengthDiary(Diary d){
 /* addWeek  Ajout d'une nouvelle action selon l'année, la semaine, le jour et l'heure  */
 /*                                                                                     */
 /* En entrée: pd le pointeur qui pointe sur le pointeur tête de l'agenda               */
-/*            year la chaine de caractère donnant l'année                              */
-/*            weekNumber, day et hour les valeurs de la semaine, du jour et de l'heure */
+/*            year et week les chaines de caractères donnant l'année et la semaine     */
+/*            day et hour les valeurs de la semaine, du jour et de l'heure             */
 /*           et name la chaîne de caractère contenant le nom de l'action               */
 /*                                                                                     */
 /* En sortie: void                                                                     */
+/*                                                                                     */
+/* Variables locales: curr : pointeur de parcours de liste                             */
+/*            prec: pointeur de l'élément précédent celui pointé par curr              */
+/*            tmp: case à ajouter dans la liste                                        */
+/*            code: boléeen qui vérifier si l'ajout est fait ou non                    */
 /* ----------------------------------------------------------------------------------- */
 
 // Ajout d'une nouvelle action selon l'année, la semaine, le jour et l'heure
@@ -247,7 +262,7 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
                 }
                 else{
                     //On se déplace jusqu'à obtenir une semaine supérieure ou égale dans la liste sans changer d'année
-                    while (curr->next!= NULL && strcmp(curr->year,year)==0 && strcmp(curr->weekNumber, weekNumber)>0 ){
+                    while (curr->next!= NULL && strcmp(curr->year,year)==0 && strcmp(curr->weekNumber, weekNumber)<0 ){
                         prec = curr;
                         curr = curr->next;
                     }
@@ -321,6 +336,8 @@ void findPattern(Diary d, patternList_t *ppl, char *pattern){
 /* En entrée: pd le pointeur qui pointe sur la tête de la liste chainée */
 /*                                                                      */
 /* En sortie: void                                                      */
+/*                                                                      */
+/* Variables locales: curr : l'élément à supprimer                      */
 /* -------------------------------------------------------------------- */
 
 void supprFirstWeek(Diary* pd){
@@ -339,6 +356,10 @@ void supprFirstWeek(Diary* pd){
 /*           et name la chaîne de caractère contenant le nom de l'action               */
 /*                                                                                     */
 /* En sortie: TRUE si la suppression est faite, FALSE sinon                            */
+/*                                                                                     */
+/* Variables locales: curr : pointeur de parcours de liste                             */
+/*            prec: pointeur de l'élément précédent celui pointé par curr              */
+/*            code: boléeen qui vérifier si la suppression est faite ou non            */
 /* ----------------------------------------------------------------------------------- */
 
 Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour, char name[]){
@@ -426,6 +447,9 @@ void displayWeeksList(Diary d){
 /*            filename le nom du fichier à lire                         */
 /*                                                                      */
 /* En sortie: void                                                      */
+/*                                                                      */
+/* Variables locales: file : fichier en cours de lecture                */
+/*            l: copie de la liste des actions                          */
 /* -------------------------------------------------------------------- */
 
 void saveDiary(Diary d, char *filename){
@@ -460,9 +484,11 @@ void saveDiary(Diary d, char *filename){
 /* En entrée: d le pointeur qui pointe sur la tête de la liste de l'agenda    */
 /*                                                                            */
 /* En sortie: void                                                            */
+/*                                                                            */
+/* Variables locales: curr : pointeur de parcours de liste                    */
+/*            suiv: pointeur de l'élément suivant celui pointé par curr       */
 /* -------------------------------------------------------------------------- */
 
-// Libération de la liste des semaines
 void freeDiary (Diary d){
     Diary curr = d;
     Diary suiv = d;

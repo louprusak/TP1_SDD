@@ -47,6 +47,8 @@ ActionsList createAction(int day, int hour, char *name){
 /*            name la chaîne de caractère contenant le nom de l'action         */
 /*                                                                             */
 /* En sortie: void                                                             */
+/*                                                                             */
+/* Variables locales: tmp, case créée à rajouter                               */
 /* --------------------------------------------------------------------------- */
 
 void insertFirstAction(ActionsList *plist, int day, int hour, char * name){
@@ -103,10 +105,13 @@ int lengthActions(ActionsList l){
 /*            name la chaîne de caractère contenant le nom de l'action        */
 /*                                                                            */
 /* En sortie: TRUE si l'action a pu être ajoutée, FALSE sinon                 */
+/*                                                                            */
+/* Variables locales: curr : pointeur de parcours de liste                    */
+/*            prec: pointeur de l'élément précédent celui pointé par curr     */
+/*            tmp: case à ajouter dans la liste                               */
+/*            code: boléeen qui vérifier si l'ajout est fait ou non           */
 /* -------------------------------------------------------------------------- */
 
-// curr: pointeur de parcours de liste
-// prec : pointeur de l'élément précédant celui en cours de lecture
 Boolean addAction(ActionsList *plist, int day,int hour, char *name){
     Boolean code = TRUE; // indicateur d'erreur
     
@@ -188,6 +193,8 @@ Boolean addAction(ActionsList *plist, int day,int hour, char *name){
 /* En entrée: plist le pointeur du le pointeur tête de la liste de l'agenda   */
 /*                                                                            */
 /* En sortie: void                                                            */
+/*                                                                            */
+/* Variables locales: curr: l'élément à supprimer                             */
 /* -------------------------------------------------------------------------- */
 
 void supprFirstAction(ActionsList* plist){
@@ -204,7 +211,12 @@ void supprFirstAction(ActionsList* plist){
 /*            name la chaîne de caractère contenant le nom de l'action        */
 /*                                                                            */
 /* En sortie: TRUE si l'action a pu être supprimée, FALSE sinon               */
+/*                                                                            */
+/* Variables locales: curr : pointeur de parcours de liste                    */
+/*            prec: pointeur de l'élément précédent celui pointé par curr     */
+/*            code: boléeen qui vérifier si la suppression est faite ou non   */
 /* -------------------------------------------------------------------------- */
+
 
 Boolean supprAction (ActionsList* plist, int day, int hour, char name[]){
     ActionsList prec = *plist;
@@ -275,6 +287,9 @@ void displayActionsList(ActionsList list){
 /* En entrée: list le pointeur qui pointe sur la tête de la liste d'action    */
 /*                                                                            */
 /* En sortie: void                                                            */
+/*                                                                            */
+/* Variables locales: curr : pointeur de parcours de liste                    */
+/*            suiv: pointeur de l'élément suivant celui pointé par curr       */
 /* -------------------------------------------------------------------------- */
 
 void freeActionsList (ActionsList list){
