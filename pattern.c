@@ -1,5 +1,13 @@
 #include "pattern.h"
 
+/* -------------------------------------------------------------------- */
+/* initPattern        Initialisation de la liste des motifs             */
+/*                                                                      */
+/* En entrée: void                                                      */
+/*                                                                      */
+/* En sortie: ppl: la liste de type patternList_t vide                  */
+/* -------------------------------------------------------------------- */
+
 //Init ok
 patternList_t * initPattern(){
     patternList_t *ppl = (patternList_t*) malloc(sizeof(patternList_t));
@@ -15,6 +23,20 @@ patternList_t * initPattern(){
     return ppl;
 }
 
+/* ----------------------------------------------------------------------------------- */
+/* addDay  Ajout d'une nouvelle occurrence du motif selon l'année, la semaine, le jour */
+/*           l'heure et le nom de l'action                                             */
+/*                                                                                     */
+/* En entrée: ppl le pointeur sur la liste contiguë                                    */
+/*            year et week les chaines de caractères donnant l'année et la semaine     */
+/*            day et hour les valeurs de la semaine, du jour et de l'heure             */
+/*           et name la chaîne de caractère contenant le nom de l'action               */
+/*                                                                                     */
+/* En sortie: void                                                                     */
+/*                                                                                     */
+/* Variables locales: tmp : l'élément à ajouter dans la liste                          */
+/*            size: la taille de la liste non vide                                     */
+/* ----------------------------------------------------------------------------------- */
 
 void addDay(patternList_t *ppl, char * year, char * week, int day, int hour, char *actionName){
     if(ppl){
@@ -29,10 +51,10 @@ void addDay(patternList_t *ppl, char * year, char * week, int day, int hour, cha
         if(ppl->head)
         {
             //printf("ADDDAY : Tête pas vide: %d\n",ppl->head);
-            int taille = (ppl->tail) - (ppl->head) +1 ;
+            int size = (ppl->tail) - (ppl->head) +1 ;
             //printf("ADDDAY : Taille %d\n",taille);
-            (ppl->list)[taille] = tmp;
-            (ppl->tail) = &((ppl->list)[taille]);
+            (ppl->list)[size] = tmp;
+            (ppl->tail) = &((ppl->list)[size]);
         }
         else{
             //printf("ADDDAY : Tête vide\n");
@@ -51,6 +73,18 @@ void addDay(patternList_t *ppl, char * year, char * week, int day, int hour, cha
         // ppl->tail = &tmp;
     }
 }
+
+/* ----------------------------------------------------------------------------------- */
+/* displayPattern         Affichage de la liste contiguë des occurences d'un motif     */
+/*                                                                                     */
+/* En entrée: pl: la liste contiguë                                                    */
+/*            year et week les chaines de caractères donnant l'année et la semaine     */
+/*                                                                                     */
+/* En sortie: void                                                                     */
+/*                                                                                     */
+/* Variables locales: size : la taille de la liste non vide                            */
+/*            elt: une case de la liste                                                */
+/* ----------------------------------------------------------------------------------- */
 
 void displayPattern(patternList_t pl){
     //printf("Tete et queu %d %d\n",pl.head,pl.tail);

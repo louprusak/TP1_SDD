@@ -18,15 +18,19 @@ void removeBackSlashN(char *s){
     s[strlen(s) -1] = '\0';
 }
 
-/*---------------------------------------------------------------*/
-/*          Récupère une partie de la chaine de caractères       */
-/*          depuis un début et jusqu'à une fin                   */
-/*                                                               */
-/* Entrée : input ; chaine de caractères fournie                 */
-/*          output ; chaine de caractère renvoyée                */
-/*          debut ; indice de début                              */
-/*          fin ; indice de fin                                  */
-/*---------------------------------------------------------------*/
+/*----------------------------------------------------------------- */
+/*          Récupère une partie de la chaine de caractères          */
+/*          depuis un début et jusqu'à une fin                      */
+/*                                                                  */
+/* Entrée : input ; chaine de caractères fournie                    */
+/*          output ; chaine de caractère renvoyée                   */
+/*          debut ; indice de début                                 */
+/*          fin ; indice de fin                                     */
+/*                                                                  */
+/* Variables locales:                                               */
+/*            i: indice du caractère en cours de lecture dans input */
+/*            j : indice du prochain caractère libre dans output    */
+/*----------------------------------------------------------------- */
 
 void recupString(char *input, char *output, int debut,int fin){
     int j = 0;
