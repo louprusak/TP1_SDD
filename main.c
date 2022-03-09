@@ -76,6 +76,7 @@ int main(int argc, char **argv){
                 printf("\nEntrer le nom de l'action : ");
                 // Utilisation du fgets ??
                 fgets(name,ACTION_NAME_SIZE,stdin);
+                removeBackSlashN(name);
                 printf("\n");
                 if (addWeek(&d,year,week,day,hour,name)){
                     displayWeeksList(d);
@@ -101,6 +102,7 @@ int main(int argc, char **argv){
                 scanf("%d%*c", &hour);
                 printf("\nEntrer le nom de l'action: ");
                 fgets(name,ACTION_NAME_SIZE,stdin);
+                removeBackSlashN(name);
                 printf("\n");
 
                 if (supprWeek(&d,year,week,day,hour,name)){
