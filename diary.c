@@ -247,7 +247,7 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
                 }
                 else{
                     //On se déplace jusqu'à obtenir une semaine supérieure ou égale dans la liste sans changer d'année
-                    while (curr->next!= NULL && strcmp(curr->year,year)==0 && strcmp(curr->weekNumber, weekNumber)>0 ){
+                    while (curr->next!= NULL && strcmp(curr->year,year)==0 && strcmp(curr->weekNumber, weekNumber)<0 ){
                         prec = curr;
                         curr = curr->next;
                     }
