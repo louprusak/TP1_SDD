@@ -8,7 +8,7 @@
 #include "diary.h"
 
 /*---------------------------------------------------------------*/
-/*          Enlève le caractère de retour à la                   */
+/* removeBackSlashN    Enlève le caractère de retour à la        */
 /*          fin d'une chaine de carcatères                       */
 /*                                                               */
 /* Entrée : s ; chaine de caractères                             */
@@ -19,7 +19,7 @@ void removeBackSlashN(char *s){
 }
 
 /*----------------------------------------------------------------- */
-/*          Récupère une partie de la chaine de caractères          */
+/* recupString       Récupère une partie de la chaine de caractères */
 /*          depuis un début et jusqu'à une fin                      */
 /*                                                                  */
 /* Entrée : input ; chaine de caractères fournie                    */
