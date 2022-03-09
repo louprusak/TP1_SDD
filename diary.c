@@ -104,14 +104,17 @@ void initDiaryWithFile(Diary *pd, char *fileName){
 
 //Création d'une semaine avec une action insérée
 Diary createWeekWithAction(char * year, char *weekNumber,int day, int hour, char * name){
+    printf("Je passe dans le createweek\n");
     week_t* tmp = (week_t*) malloc(sizeof(week_t));
     if(tmp){
         //Allocation réussie
         strcpy(tmp->year,year);
         strcpy(tmp->weekNumber,weekNumber);
+        tmp->actionsList = NULL;
+        tmp->next = NULL;
         //tmp->weekNumber = weekNumber;  on doit utliser des chaines de caractères
         addAction(&(tmp->actionsList), day, hour, name);
-        tmp->next = NULL;
+        
     }
     return tmp;
 }
@@ -146,6 +149,7 @@ Diary createWeekWithAction(char * year, char *weekNumber,int day, int hour, char
 /* ----------------------------------------------------------------------------------- */
 
 void insertFirstWeekWithAction(Diary *d, char * year, char *weekNumber,int day, int hour, char* name){
+    printf("Je passe dans le insertfirst\n");
     week_t *tmp = createWeekWithAction(year, weekNumber, day, hour, name);
     if(tmp){
         if(!*d){

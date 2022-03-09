@@ -113,6 +113,8 @@ int lengthActions(ActionsList l){
 /* -------------------------------------------------------------------------- */
 
 Boolean addAction(ActionsList *plist, int day,int hour, char *name){
+    printf("Je passe dans le addAction\n");
+
     Boolean code = TRUE; // indicateur d'erreur
     
     if(!*plist ){
