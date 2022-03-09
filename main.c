@@ -9,12 +9,8 @@
 
 //Programme principal
 int main(int argc, char **argv){
-
-
-
     int quit = 0;
     int answer = -1;
-    int size = 0;
     char filename[FILENAME_SIZE];
     Diary d = initDiary();
     patternList_t *pl;
@@ -37,13 +33,13 @@ int main(int argc, char **argv){
     while(!quit){
 
         printf("\nChoisissez ce que vous voulez faire :\n"
-            "\n\t1) Initialiser l'Agenda à partir du fichier texte passé en argument\n"
-            "\t2) Ajouter une action dans l'Agenda\n"
-            "\t3) Supprimer une action de l'Agenda\n"
-            "\t4) Obtenir la liste des jours avec actions contenant motif (WIP)\n"
-            "\t5) Sauvegarder l'Agenda en fichier texte\n"
-            "\t6) Afficher l'Agenda\n"
-            "\n\t0) Quitter\n"
+            "\n\t1) Initialiser l'Agenda à partir du fichier texte passé en argument.\n"
+            "\t2) Ajouter une action dans l'Agenda.\n"
+            "\t3) Supprimer une action de l'Agenda.\n"
+            "\t4) Obtenir la liste des jours avec actions contenant motif.\n"
+            "\t5) Sauvegarder l'Agenda en fichier texte.\n"
+            "\t6) Afficher l'Agenda.\n"
+            "\n\t0) Quitter.\n"
             "\nVeuillez indiquer votre choix en tapant le numéro associé sur votre clavier : "
             );
 
