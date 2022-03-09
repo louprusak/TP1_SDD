@@ -104,7 +104,7 @@ int main(int argc, char **argv){
                 scanf("%d%*c", &hour);
                 printf("\nEntrer le nom de l'action: ");
                 fgets(name,ACTION_NAME_SIZE,stdin);
-                removeBackSlashN(name);
+                //removeBackSlashN(name);
                 printf("\n");
 
                 if (supprWeek(&d,year,week,day,hour,name)){

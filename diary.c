@@ -72,8 +72,18 @@ void initDiaryWithFile(Diary *pd, char *fileName){
             recupString(line,week,4,5);
             recupString(line,day,6,6);
             recupString(line,hour,7,8);
-            recupString(line,name,9,18);
+            //recupString(line,name,9,18);
             //removeBackSlashN(name);
+
+            for (int i = 9; i < 19; i++)
+            {
+                if(line[i] == '\n'){
+                    name[i-9] = '\0';
+                }else{
+                    name[i-9] = line[i];
+                }
+            }
+            
 
             //printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Nom de l'action: %s\n",year, week, day, hour,name);
 
