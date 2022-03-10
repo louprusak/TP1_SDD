@@ -82,7 +82,7 @@ int main(int argc, char **argv){
                 //Supression d'une action de l'Agenda
                 printf("_____________________________________________________________________________\n"
                         "3) Suppression d'une action dans l'Agenda. \n"
-                        "\nVeuillez entrer l'élément à supprimer : "
+                        "\nVeuillez entrer l'élément à supprimer : \n"
                 );
                 scanWeek(year, week, &day, &hour, name);
                 printf("\n");
@@ -105,6 +105,7 @@ int main(int argc, char **argv){
                 removeBackSlashN(pattern);
                 findPattern(d,pl,pattern);
                 displayPattern(*pl);
+                freePattern(pl);
                 break;
             case 5:
                 //Sauvegarde de l'Agenda

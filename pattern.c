@@ -124,7 +124,7 @@ void displayPattern(patternList_t pl){
 //     } 
 // }
 
-// void freePattern(patternList_t *ppl){
-//     //free(ppl->head);
-//     free(ppl);
-// }
+void freePattern(patternList_t *ppl){
+    //free(ppl->head);
+    free(ppl);
+}
