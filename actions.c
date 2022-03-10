@@ -160,6 +160,7 @@ Boolean addAction(ActionsList *plist, int day,int hour, char *name){
                     //Si on a extactement la même heure on ne peut pas avoir deux actions à la même heure donc on renvoie une erreur
                     if (curr->hour == hour){
                         code = FALSE;
+                        free(tmp);
                     } 
                     else {
                         // L'élément n'est pas le dernier de la liste ou alors il possède un jour plus grand que celui à placer

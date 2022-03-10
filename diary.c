@@ -251,6 +251,7 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
                     if (strcmp(curr->weekNumber, weekNumber) == 0){
                         printf("On a la même semaine\n");
                         code = addAction(&(curr->actionsList),dayNumber,hour,name);
+                        free(tmp);
                     } 
                     else {
                         printf("On a pas la même semaine\n");
