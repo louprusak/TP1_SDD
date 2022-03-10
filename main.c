@@ -63,7 +63,7 @@ int main(int argc, char **argv){
                     displayWeeksList(d);
                 }
                 else{
-                    printf("Initialisation impossible car aucun fichier n'a été renseigné.\n\n");
+                    printf("--> Initialisation impossible car aucun fichier n'a été renseigné.\n\n");
                 }
                 break;
             case 2:
@@ -71,58 +71,28 @@ int main(int argc, char **argv){
                 printf("_____________________________________________________________________________\n"
                         "2) Ajout d'une action dans l'Agenda. \n"
                 );
-                printf("Entrer l'année : ");
-                scanf("%s",year);
-                printf("\nEntrer la semaine :");
-                scanf("%s", week);
-                printf("\nEntrer le jour : ");
-                scanf("%d", &day);
-                printf("\nEntrer l'heure : ");
-                scanf("%d%*c", &hour);
-                printf("\nEntrer le nom de l'action : ");
-                // Utilisation du fgets ??
-                fgets(name,ACTION_NAME_SIZE,stdin);
-                printf("action : -%s-\n",name);
-                removeBackSlashN(name);
-                printf("action 2 : -%s-\n",name);
+                scanWeek(year, week, &day, &hour, name);
                 printf("\n");
-                if (addWeek(&d,year,week,day,hour,name)){
-                    displayWeeksList(d);
+                if (!addWeek(&d,year,week,day,hour,name)){
+                    printf("--> Il y a déjà un élément à cette date.\n");
                 }
-                else {
-                    printf("Il y a déjà un élément à cette date.\n");
-                    displayWeeksList(d);
-                }
+                displayWeeksList(d);
                 break;
             case 3:
                 //Supression d'une action de l'Agenda
                 printf("_____________________________________________________________________________\n"
                         "3) Suppression d'une action dans l'Agenda. \n"
+                        "\nVeuillez entrer l'élément à supprimer : "
                 );
-                printf("Entrer l'élément à supprimer: \n");
-                printf("Entrer l'année : ");
-                scanf("%s",year);
-                printf("\nEntrer la semaine :");
-                scanf("%s", week);
-                printf("\nEntrer le jour : ");
-                scanf("%d", &day);
-                printf("\nEntrer l'heure : ");
-                scanf("%d%*c", &hour);
-                printf("\nEntrer le nom de l'action: ");
-                fgets(name,ACTION_NAME_SIZE,stdin);
-                printf("action : -%s-\n",name);
-                removeBackSlashN(name);
-                printf("action 2 : -%s-\n",name);
+                scanWeek(year, week, &day, &hour, name);
                 printf("\n");
-
                 if (supprWeek(&d,year,week,day,hour,name)){
-                    printf("L'élément a bien été supprimé.\n");
-                    displayWeeksList(d);
+                    printf("--> L'élément a bien été supprimé.\n");
                 }
                 else {
-                    printf("L'élément n'existe pas\n");
-                    displayWeeksList(d);
+                    printf("--> L'élément n'existe pas\n");
                 }
+                displayWeeksList(d);
                 break;
             case 4:
                 //Sous liste des jours avec actions contenant motifs
@@ -130,18 +100,11 @@ int main(int argc, char **argv){
                         "4) Rechercher un motif d'action dans l'agenda. \n"
                         "\nVeuillez entrer le motif à rechercher : "
                 );
+                pl = initPattern();
                 fgets(pattern,11, stdin);
                 removeBackSlashN(pattern);
-                pl = initPattern();
-                //printf("Initpattern ok\n");
-                //printf("Tete et queu test qui va pas marcher %d %d\n",pl->head,pl->tail);
-
                 findPattern(d,pl,pattern);
-                //printf("find patern OK\n");
                 displayPattern(*pl);
-                //printf("Display pattern ok \n");
-                //freePattern(&pl);
-                //printf("Free pattern ok\n");
                 break;
             case 5:
                 //Sauvegarde de l'Agenda
@@ -149,34 +112,17 @@ int main(int argc, char **argv){
                         "5) Sauvegarde de l'Agenda en fichier texte. \n"
                         "\nVeuillez enter le nom du fichier pour la sauvegarde : "
                 );
-                scanf("%s",filename);
-                printf("%s",filename);
-
-                
-                // d = initDiary();
-
-                // insertFirstWeek(&d,"2022",1);
-                // addAction(&d->actionsList, 5, atoi("08"),"Espagnol");
-                // addAction(&d->actionsList, 1, atoi("08"),"BDD");
-                // addAction(&d->actionsList, 5, atoi("10"),"Anglais");
-                // addAction(&d->actionsList, 6, atoi("12"),"Manger");
-
-                // displayWeeksList(d);
-                // printf("insertions OK\n");
-                
-                //displayWeeksList(d);
-                // printf("Affichage OK\n");
-                saveDiary(d,filename);
-
+                scanf("%s%*c",filename);
+                if(saveDiary(d,filename)){
+                    printf("--> Sauvegarde réussie.\n");
+                }
+                else{
+                    printf("--> Erreur, impossible de sauvegarder.\n");
+                }
                 break;
             case 6:
                 //Affichage de l'Agenda
-                if(d){
-                    displayWeeksList(d);
-                }
-                else{
-                    printf("--> L'agenda est vide.\n");
-                }
+                displayWeeksList(d);
                 break;
             case 0:
                 //Fermeture du programme

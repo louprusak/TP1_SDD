@@ -102,6 +102,24 @@ void initDiaryWithFile(Diary *pd, char *fileName){
     }
     fclose(file);
 }
+
+void scanWeek(char *year, char *week, int *day, int *hour, char *name){
+    printf("Entrez l'année : ");
+    scanf("%s",year);
+    printf("\nEntrez la semaine : ");
+    scanf("%s", week);
+    printf("\nEntrez le jour : ");
+    scanf("%d", day);
+    printf("\nEntrez l'heure : ");
+    scanf("%d%*c", hour);
+    printf("\nEntrez le nom de l'action : ");
+    fgets(name,ACTION_NAME_SIZE,stdin);
+    printf("action : -%s-\n",name);
+    removeBackSlashN(name);
+    printf("action 2 : -%s-\n",name);
+}
+
+
 /* ----------------------------------------------------------------------------------- */
 /* createWeekWithAction  Création d'une semaine avec une action insérée                */
 /*                                                                                     */
@@ -456,14 +474,19 @@ Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour, char 
 /* -------------------------------------------------------------------- */
 
 void displayWeeksList(Diary d){
-    printf("Agenda :\n");
-    while (d != NULL)
-    {
-        printf("\tAnnée %s semaine %s :\n",d->year, d->weekNumber);
-        displayActionsList(d->actionsList);
-        d = d->next;
+    if(d){
+        printf("\nAgenda :\n");
+        while (d != NULL)
+        {
+            printf("\tAnnée %s semaine %s :\n",d->year, d->weekNumber);
+            displayActionsList(d->actionsList);
+            d = d->next;
+        }
+        printf("\n");
     }
-    printf("\n");
+    else{
+        printf("--> L'agenda est vide.\n");
+    }
 }
 
 /* -------------------------------------------------------------------- */
@@ -478,8 +501,9 @@ void displayWeeksList(Diary d){
 /*            l: copie de la liste des actions                          */
 /* -------------------------------------------------------------------- */
 
-void saveDiary(Diary d, char *filename){
+Boolean saveDiary(Diary d, char *filename){
     //printf("Je passe dans le save\n");
+    Boolean code = TRUE;
     if(d){
         FILE *file = fopen(filename,"w");
         if(file){
@@ -499,8 +523,10 @@ void saveDiary(Diary d, char *filename){
         fclose(file);
     }
     else{
+        code = FALSE;
         printf("Impossible l'agenda est vide.\n");
     }
+    return code;
     
 }
 

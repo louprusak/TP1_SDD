@@ -44,7 +44,7 @@ typedef struct week{
 
 Diary initDiary(void);
 void initDiaryWithFile(Diary *d, char *fileName);
-void saveDiary(Diary d, char *filename);
+Boolean saveDiary(Diary d, char *filename);
 Diary initWeeks(void);
 Boolean emptyDiary(Diary d);
 int lengthDiary(Diary d);
@@ -55,6 +55,7 @@ int lengthDiary(Diary d);
 
 Diary createWeekWithAction(char * year, char * weekNumber,int day, int hour, char * name);
 void insertFirstWeekWithAction(Diary *d, char * year, char * weekNumber,int day, int hour, char* name);
+void scanWeek(char *year, char *week, int *day, int *hour, char *name);
 Boolean addWeek(Diary * pd,char * year, char * weekNumber,int dayNumber, int hour, char *name);
 void findPattern(Diary d, patternList_t *ppl, char *pattern);
 void supprFirstWeek(Diary* pd);
