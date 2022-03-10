@@ -106,7 +106,6 @@ void scanWeek(Boolean del, char *year, char *week, int *day, int *hour, char *na
 /* En sortie: tmp une case semaine                                                     */
 /* ----------------------------------------------------------------------------------- */
 Diary createWeekWithAction(char * year, char *weekNumber,int day, int hour, char * name){
-    printf("Je passe dans le createweek\n");
     week_t* tmp = (week_t*) malloc(sizeof(week_t));
     if(tmp){
         //Allocation réussie
@@ -134,7 +133,6 @@ Diary createWeekWithAction(char * year, char *weekNumber,int day, int hour, char
 /* Variables locales: tmp : case créée à rajouter au début de la liste                 */
 /* ----------------------------------------------------------------------------------- */
 void insertFirstWeekWithAction(Diary *d, char * year, char *weekNumber,int day, int hour, char* name){
-    printf("Je passe dans le insertfirst\n");
     week_t *tmp = createWeekWithAction(year, weekNumber, day, hour, name);
     if(tmp){
         if(!*d){
@@ -200,11 +198,9 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
     Boolean code = TRUE; // indicateur d'erreur
     
     if(!*pd){
-        printf("La liste est vide\n\n");
         insertFirstWeekWithAction(pd,year,weekNumber,dayNumber, hour, name);
     }
     else{
-        printf("La liste n'est pas vide\n");
         Diary curr = *pd;
         Diary prec = curr;
         
@@ -212,11 +208,9 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
         //Ou qu'il est égal mais la semaine est plus petite que la première
         //Alors l'élement va être en tête de liste 
         if (strcmp(curr->year,year) > 0 || (strcmp(curr->year,year) == 0 && strcmp(curr->weekNumber,weekNumber) > 0)){
-            printf("On insère en tête\n");
             insertFirstWeekWithAction(pd, year, weekNumber,dayNumber, hour, name);
         } 
         else{
-            printf("On n'insère pas en tête\n");
             Diary tmp = createWeekWithAction(year, weekNumber, dayNumber, hour, name);
 
             //Tri en fonction du numéro de l'année
@@ -228,19 +222,14 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
 
             //Si l'année existe dans la liste
             if (strcmp(curr->year,year) == 0){
-
-                printf("L'année existe\n");
-
                 //Tri en fonction des semaines
 
                 //Toutes les semaines sont sup alors on ajoute en tête de l'année
                 if (strcmp(curr->weekNumber,weekNumber) > 0){
-                    printf("Les semaines sont sup\n");
                     prec->next = tmp;
                     tmp->next = curr;
                 }
                 else{
-                    printf("Les semaines ne sont pas sup\n");
                     //On se déplace jusqu'à obtenir une semaine supérieure ou égale dans la liste sans changer d'année
                     while (curr->next!= NULL && strcmp(curr->year,year)==0 && strcmp(curr->weekNumber, weekNumber)<0 ){
                         prec = curr;
@@ -249,19 +238,15 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
 
                     //Si on a extactement la même semaine on ajoute l'action à la liste des actions
                     if (strcmp(curr->weekNumber, weekNumber) == 0){
-                        printf("On a la même semaine\n");
                         code = addAction(&(curr->actionsList),dayNumber,hour,name);
                         free(tmp);
                     } 
                     else {
-                        printf("On a pas la même semaine\n");
                         // L'élément n'est pas le dernier de la liste ou alors il possède une année plus grande que celle à placer
                         if (curr->next || strcmp(curr->year,year) > 0){
-                            printf("On trouve une année plus grande\n");
                             prec->next = tmp;
                             tmp->next = curr;
                         } else {
-                            printf("On a rien donc on insert en fin\n");
                             // insertion en fin
                             curr->next = tmp;
                         }
@@ -270,7 +255,6 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
             }
             //Si il n'existe pas on le crée et on insère
             else{
-                printf("L'année n'existe pas\n");
                 if (curr->next){
                     prec->next = tmp;
                     tmp->next = curr;

@@ -30,9 +30,9 @@ void removeBackSlashN(char *s){
 /*            i: indice du caractère en cours de lecture dans input */
 /*            j : indice du prochain caractère libre dans output    */
 /*----------------------------------------------------------------- */
-void recupString(char *input, char *output, int debut,int fin){
+void recupString(char *input, char *output, int begin,int end){
     int j = 0;
-    for (int i = debut; i <= fin; i++)
+    for (int i = begin; i <= end; i++)
     {
         if(input[i] != '\0'){
             output[j] = input[i];
