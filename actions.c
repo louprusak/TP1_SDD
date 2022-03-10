@@ -220,7 +220,7 @@ void supprFirstAction(ActionsList* plist){
 /* -------------------------------------------------------------------------- */
 
 
-Boolean supprAction (ActionsList* plist, int day, int hour, char name[]){
+Boolean supprAction (ActionsList* plist, int day, int hour){
     ActionsList prec = *plist;
     ActionsList curr=prec;
     Boolean code = TRUE;
@@ -242,8 +242,8 @@ Boolean supprAction (ActionsList* plist, int day, int hour, char name[]){
                 prec = curr;
                 curr = curr->next;
             }
-            // Vérification si il y a égalité de l'heure et du nom
-            if (curr->hour==hour && strcmp(curr->actionName, name)==0){
+            // Vérification si il y a égalité de l'heure
+            if (curr->hour==hour){
                 // Cas si l'élément à supprimer est le premier
                 if (curr == *plist){
                     printf("Cas de l'élément en premier à supprimer\n");

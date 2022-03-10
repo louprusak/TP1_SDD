@@ -55,11 +55,11 @@ int lengthDiary(Diary d);
 
 Diary createWeekWithAction(char * year, char * weekNumber,int day, int hour, char * name);
 void insertFirstWeekWithAction(Diary *d, char * year, char * weekNumber,int day, int hour, char* name);
-void scanWeek(char *year, char *week, int *day, int *hour, char *name);
+void scanWeek(Boolean del,char *year, char *week, int *day, int *hour, char *name);
 Boolean addWeek(Diary * pd,char * year, char * weekNumber,int dayNumber, int hour, char *name);
 void findPattern(Diary d, patternList_t *ppl, char *pattern);
 void supprFirstWeek(Diary* pd);
-Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour, char name[]);
+Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour);
 void displayWeeksList(Diary d);
 void freeDiary (Diary d);
 

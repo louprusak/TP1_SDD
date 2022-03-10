@@ -71,7 +71,7 @@ int main(int argc, char **argv){
                 printf("_____________________________________________________________________________\n"
                         "2) Ajout d'une action dans l'Agenda. \n"
                 );
-                scanWeek(year, week, &day, &hour, name);
+                scanWeek(FALSE,year, week, &day, &hour, name);
                 printf("\n");
                 if (!addWeek(&d,year,week,day,hour,name)){
                     printf("--> Il y a déjà un élément à cette date.\n");
@@ -84,9 +84,9 @@ int main(int argc, char **argv){
                         "3) Suppression d'une action dans l'Agenda. \n"
                         "\nVeuillez entrer l'élément à supprimer : \n"
                 );
-                scanWeek(year, week, &day, &hour, name);
+                scanWeek(TRUE, year, week, &day, &hour, name);
                 printf("\n");
-                if (supprWeek(&d,year,week,day,hour,name)){
+                if (supprWeek(&d,year,week,day,hour)){
                     printf("--> L'élément a bien été supprimé.\n");
                 }
                 else {

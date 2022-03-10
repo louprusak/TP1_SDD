@@ -7,27 +7,6 @@
 
 #include "diary.h"
 
-////////////// INUTILE /////////////////
-// Diary initDiary(char *filename){
-//     char year[4] = "";
-//     int weekNumber = 0;
-//     int dayNumber = 0;
-//     int hour = 0;
-//     char actionName[10] = "";
-
-//     FILE * file = fopen(filename,"r");
-//     if(file){
-//         while(!feof(file)){
-//             fread(file,4*sizeof(char),1,year);
-//             fread(file,2*sizeof(int),1,weekNumber);
-//             fread(file,sizeof(int),1,dayNumber);
-//             fread(file,2*sizeof(int),1,hour);
-//             fscanf(file,"%s",actionName);
-//             addWeek();
-//         }
-//     }
-// }
-
 /* -------------------------------------------------------------------- */
 /* initDiary        Initialisation de la liste des semaines (Agenda)    */
 /*                                                                      */
@@ -35,10 +14,10 @@
 /*                                                                      */
 /* En sortie: NULL                                                      */
 /* -------------------------------------------------------------------- */
-
 Diary initDiary(void){
     return NULL;
 }
+
 
 /* -------------------------------------------------------------------- */
 /* initDiaryWithFile      Lecture de l'agenda dans un fichier           */
@@ -56,54 +35,51 @@ Diary initDiary(void){
 /*            name: nom de l'action de la ligne                         */
 /*            file: fichier en cours de lecture                         */
 /* -------------------------------------------------------------------- */
-
 void initDiaryWithFile(Diary *pd, char *fileName){
 
     char line[LINE_SIZE]="";
     char year[YEAR_SIZE]="", week[WEEK_SIZE]="", hour[HOUR_SIZE]="", name[ACTION_NAME_SIZE]="", day[DAY_SIZE]="";
 
     FILE* file = fopen(fileName, "r");
+
     if(file){
-        while(fgets(line,LINE_SIZE,file)){
 
-            //printf("Ligne: %s\n",line);
-
+        while(fgets(line,LINE_SIZE,file))
+        {
             recupString(line,year,0,3);
             recupString(line,week,4,5);
             recupString(line,day,6,6);
             recupString(line,hour,7,8);
-            //recupString(line,name,9,18);
-            //removeBackSlashN(name);
 
             for (int i = 9; i < 19; i++)
             {
-                if(line[i] == '\n'){
+                if(line[i] == '\n')
+                {
                     name[i-9] = '\0';
-                }else{
+                }
+                else
+                {
                     name[i-9] = line[i];
                 }
             }
-            
 
-            //printf("Année : %s\n Semaine: %s\n Jour: %s\n Heure: %s\n Nom de l'action: %s\n",year, week, day, hour,name);
-
-            ////// PROBLÈME AVEC LA FORME DE name QUI N'EST PAS ACCEPTÉ PAR LA FONCTION ///////////
             addWeek(pd,year,week,atoi(day),atoi(hour),name);
-            
-
-            ////////////// INUTILE /////////////////
-            // insertFirstWeek(&d,"2022",1);
-            // addAction(&d->actionsList, 5, atoi("08"),"Espagnol");
-            // addAction(&d->actionsList, 1, atoi("08"),"BDD");
-            // addAction(&d->actionsList, 5, atoi("10"),"Anglais");
-            // addAction(&d->actionsList, 6, atoi("12"),"Manger");
-            
         }
     }
     fclose(file);
 }
 
-void scanWeek(char *year, char *week, int *day, int *hour, char *name){
+/* --------------------------------------------------------------------- */
+/* scanWeek      Lecture d'une semaine avec action au clavier            */
+/*                                                                       */
+/* En entrée: del booléen permet de ne pas rentrer le nom si suppression */
+/*            year la chaine de caractère donnant l'année                */
+/*            weekNumber, day et hour les valeurs semaine, jour et heure */
+/*           et name la chaîne de caractère contenant le nom de l'action */
+/*                                                                       */
+/* En sortie: void                                                       */
+/* --------------------------------------------------------------------- */
+void scanWeek(Boolean del, char *year, char *week, int *day, int *hour, char *name){
     printf("Entrez l'année : ");
     scanf("%s",year);
     printf("\nEntrez la semaine : ");
@@ -112,11 +88,11 @@ void scanWeek(char *year, char *week, int *day, int *hour, char *name){
     scanf("%d", day);
     printf("\nEntrez l'heure : ");
     scanf("%d%*c", hour);
-    printf("\nEntrez le nom de l'action : ");
-    fgets(name,ACTION_NAME_SIZE,stdin);
-    printf("action : -%s-\n",name);
-    removeBackSlashN(name);
-    printf("action 2 : -%s-\n",name);
+    if(!del){
+        printf("\nEntrez le nom de l'action : ");
+        fgets(name,ACTION_NAME_SIZE,stdin);
+        removeBackSlashN(name);
+    }
 }
 
 
@@ -129,8 +105,6 @@ void scanWeek(char *year, char *week, int *day, int *hour, char *name){
 /*                                                                                     */
 /* En sortie: tmp une case semaine                                                     */
 /* ----------------------------------------------------------------------------------- */
-
-//Création d'une semaine avec une action insérée
 Diary createWeekWithAction(char * year, char *weekNumber,int day, int hour, char * name){
     printf("Je passe dans le createweek\n");
     week_t* tmp = (week_t*) malloc(sizeof(week_t));
@@ -140,26 +114,10 @@ Diary createWeekWithAction(char * year, char *weekNumber,int day, int hour, char
         strcpy(tmp->weekNumber,weekNumber);
         tmp->actionsList = NULL;
         tmp->next = NULL;
-        //tmp->weekNumber = weekNumber;  on doit utliser des chaines de caractères
         addAction(&(tmp->actionsList), day, hour, name);
-        
     }
     return tmp;
 }
-
-////////////// INUTILE /////////////////
-// //Création d'une semaine avec une liste d'actions vide (POUR LES TESTS A ENLEVER SI BESOIN)
-// Diary createWeek(char *year, int weekNumber){
-//      printf("Je passe dans le createWeek\n");
-//      week_t* tmp = (week_t*) malloc(sizeof(week_t));
-//      if(tmp){
-//          strcpy(tmp->year,year);
-//          tmp->weekNumber = weekNumber;
-//          tmp->actionsList = initActions();
-//          tmp->next = NULL;
-//     }
-//     return tmp;
-// }
 
 
 /* ----------------------------------------------------------------------------------- */
@@ -175,7 +133,6 @@ Diary createWeekWithAction(char * year, char *weekNumber,int day, int hour, char
 /*                                                                                     */
 /* Variables locales: tmp : case créée à rajouter au début de la liste                 */
 /* ----------------------------------------------------------------------------------- */
-
 void insertFirstWeekWithAction(Diary *d, char * year, char *weekNumber,int day, int hour, char* name){
     printf("Je passe dans le insertfirst\n");
     week_t *tmp = createWeekWithAction(year, weekNumber, day, hour, name);
@@ -190,20 +147,6 @@ void insertFirstWeekWithAction(Diary *d, char * year, char *weekNumber,int day, 
     }
 }
 
-////////////// INUTILE /////////////////
-// // Insert en tête une semaine dans la liste des semaines (POUR LES TESTS A ENLEVER SI BESOIN)
-// void insertFirstWeek(Diary *d, char * year, int weekNumber){
-//     week_t *tmp = createWeek(year, weekNumber);
-//     if(tmp){
-//         if(!*d){
-//             tmp->next = NULL;
-//         }
-//         else{
-//             tmp->next = *d;
-//         }
-//         *d = tmp;
-//     }
-// }
 
 /* -------------------------------------------------------------------- */
 /* emptyDiary        Savoir si une liste est vide                       */
@@ -212,7 +155,6 @@ void insertFirstWeekWithAction(Diary *d, char * year, char *weekNumber,int day, 
 /*                                                                      */
 /* En sortie: TRUE si l'agenda est vide, FALSE sinon                    */
 /* -------------------------------------------------------------------- */
-
 Boolean emptyDiary(Diary d){
     Boolean code = FALSE;
     if (d == NULL){
@@ -221,6 +163,7 @@ Boolean emptyDiary(Diary d){
     return code;
 }
 
+
 /* -------------------------------------------------------------------- */
 /* lengthDiary        Connaitre la longueur de la liste                 */
 /*                                                                      */
@@ -228,7 +171,6 @@ Boolean emptyDiary(Diary d){
 /*                                                                      */
 /* En sortie: la longueur de l'agenda d                                 */
 /* -------------------------------------------------------------------- */
-
 int lengthDiary(Diary d){
     int i = 0;
     while(!emptyDiary(d)){
@@ -237,6 +179,7 @@ int lengthDiary(Diary d){
     }
     return i;
 }
+
 
 /* ----------------------------------------------------------------------------------- */
 /* addWeek  Ajout d'une nouvelle action selon l'année, la semaine, le jour et l'heure  */
@@ -253,8 +196,6 @@ int lengthDiary(Diary d){
 /*            tmp: case à ajouter dans la liste                                        */
 /*            code: boléeen qui vérifier si l'ajout est fait ou non                    */
 /* ----------------------------------------------------------------------------------- */
-
-// Ajout d'une nouvelle action selon l'année, la semaine, le jour et l'heure
 Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hour, char name[]){
     Boolean code = TRUE; // indicateur d'erreur
     
@@ -342,28 +283,20 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
     return code;
 }
 
+
 //Rechercher un motif et créer une liste des jours qui l'ont
 void findPattern(Diary d, patternList_t *ppl, char *pattern){
-            //printf("FIND PATTERN : Tete et queue: %d %d\n",ppl->head,ppl->tail);
-
     if(d){
         char *result = NULL;
         ActionsList al = NULL;
-        while (d != NULL)
-        {
+        while (d != NULL){
             al = d->actionsList;
-            while(al != NULL)
-            {
+            
+            while(al != NULL){
                 result = strstr(al->actionName,pattern);
-                //printf("FIND PATTERN : -%s- -%s-\n",al->actionName,pattern);
+
                 if(result){
-                    
-                    //printf("FIND PATTERN : result trouvé\n");
                     addDay(ppl, d->year, d->weekNumber, al->dayNumber, al->hour, al->actionName);
-                    //printf("FIND PATTERN : Add Action ok\n");
-                }
-                else{
-                    //printf("FIND PATTERN : Pas trouvé\n");
                 }
                 al = al->next;
             }
@@ -383,7 +316,6 @@ void findPattern(Diary d, patternList_t *ppl, char *pattern){
 /*                                                                      */
 /* Variables locales: curr : l'élément à supprimer                      */
 /* -------------------------------------------------------------------- */
-
 void supprFirstWeek(Diary* pd){
     Diary curr=*pd;
     *pd=(curr)->next;
@@ -405,8 +337,7 @@ void supprFirstWeek(Diary* pd){
 /*            prec: pointeur de l'élément précédent celui pointé par curr              */
 /*            code: boléeen qui vérifier si la suppression est faite ou non            */
 /* ----------------------------------------------------------------------------------- */
-
-Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour, char name[]){
+Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour){
 
     Boolean code = TRUE;
 
@@ -422,24 +353,24 @@ Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour, char 
             prec= curr;
             curr=curr->next;
         }
-        printf("déplacement année : =%s= =%s=\n=%s= =%s=\n",curr->year,curr->weekNumber, year, week);
+        //printf("déplacement année : =%s= =%s=\n=%s= =%s=\n",curr->year,curr->weekNumber, year, week);
         // Égalité sur l'année
         if (strcmp(curr->year,year)==0){
             // Déplacement selon la semaine
-            printf("égalité dans l'année\n");
+            //printf("égalité dans l'année\n");
             while (curr!=NULL && strcmp(curr->year,year)==0 && strcmp(curr->weekNumber,week)<0 ){
-                printf("je passe dans le while\n");
+                //printf("je passe dans le while\n");
                 prec = curr;
-                printf("le prec ne merde pas\n");
+                //printf("le prec ne merde pas\n");
                 curr = curr->next;
             }
-            printf("fin while après égalité année\n");
-            int retour = strcmp(curr->weekNumber,week);
-            printf("%d\n",retour);
-            printf("%d %d %s\n",day,hour,name);
+            //printf("fin while après égalité année\n");
+            //int retour = strcmp(curr->weekNumber,week);
+            //printf("%d\n",retour);
+            //printf("%d %d %s\n",day,hour,name);
             // Égalité de la semaine et l'action existe dans la liste des actions
-            if (strcmp(curr->weekNumber,week) == 0 && supprAction(&(curr->actionsList),day,hour,name)){
-                printf("égalité de la semaine\n");
+            if (strcmp(curr->weekNumber,week) == 0 && supprAction(&(curr->actionsList),day,hour)){
+                //printf("égalité de la semaine\n");
                 if (!curr->actionsList){
                     // La liste des actions est vide alors on supprime la case de l'année et de la semaine
                     if (curr==*pd){
@@ -453,7 +384,7 @@ Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour, char 
             // Dans tous les autres cas l'élément n'existe pas
             }
             else {
-                printf("l'élément n'existe pas\n");
+                //printf("l'élément n'existe pas\n");
                 code = FALSE;
             }
         }
@@ -472,12 +403,11 @@ Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour, char 
 /*                                                                      */
 /* En sortie: void                                                      */
 /* -------------------------------------------------------------------- */
-
 void displayWeeksList(Diary d){
     if(d){
         printf("\nAgenda :\n");
-        while (d != NULL)
-        {
+
+        while (d != NULL){
             printf("\tAnnée %s semaine %s :\n",d->year, d->weekNumber);
             displayActionsList(d->actionsList);
             d = d->next;
@@ -500,23 +430,21 @@ void displayWeeksList(Diary d){
 /* Variables locales: file : fichier en cours de lecture                */
 /*            l: copie de la liste des actions                          */
 /* -------------------------------------------------------------------- */
-
 Boolean saveDiary(Diary d, char *filename){
-    //printf("Je passe dans le save\n");
     Boolean code = TRUE;
+
     if(d){
         FILE *file = fopen(filename,"w");
         if(file){
-            //printf("%s %s\n",d->year,d->weekNumber);
 
             while(d != NULL){
-                
                 ActionsList l = d->actionsList;
+
                 while(l != NULL){
                     fprintf(file,"%s%s%d%02d%s\n",d->year,d->weekNumber,l->dayNumber,l->hour,l->actionName);
                     l = l->next;
                 }
-                
+
                 d = d->next;
             }
         }
@@ -527,7 +455,6 @@ Boolean saveDiary(Diary d, char *filename){
         printf("Impossible l'agenda est vide.\n");
     }
     return code;
-    
 }
 
 /* -------------------------------------------------------------------------- */
@@ -540,7 +467,6 @@ Boolean saveDiary(Diary d, char *filename){
 /* Variables locales: curr : pointeur de parcours de liste                    */
 /*            suiv: pointeur de l'élément suivant celui pointé par curr       */
 /* -------------------------------------------------------------------------- */
-
 void freeDiary (Diary d){
     Diary curr = d;
     Diary suiv = d;
