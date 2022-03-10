@@ -239,6 +239,7 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
                     //Si on a extactement la même semaine on ajoute l'action à la liste des actions
                     if (strcmp(curr->weekNumber, weekNumber) == 0){
                         code = addAction(&(curr->actionsList),dayNumber,hour,name);
+                        freeActionsList(tmp->actionsList);
                         free(tmp);
                     } 
                     else {
