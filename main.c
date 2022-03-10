@@ -9,27 +9,32 @@
 
 //Programme principal
 int main(int argc, char **argv){
+
+    //Variables de menu
     int quit = 0;
     int answer = -1;
-    char filename[FILENAME_SIZE];
+    
+    //Listes nécessaires à l'éxecution du programe
     Diary d = initDiary();
     patternList_t *pl;
 
+    //Elements constituant les éléments des listes
     char year[YEAR_SIZE]="";
     char name[ACTION_NAME_SIZE]="";
     char week[WEEK_SIZE]="";
-    char pattern[11] = "";
     int day = 0;
     int hour = 0;
 
-    // printf("Entrer le nom de l'action : ");
-    // fgets(name,ACTION_NAME_SIZE,stdin);
-    // printf("%s",name);
+    //Elements à rentrer par l'utilisateur
+    char pattern[11] = "";
+    char filename[FILENAME_SIZE];
 
+    //Message d'entrée dans le programme
     printf("\n#############################################################################\n"
             "# Bonjour et bienvenue sur votre système personnalisé de gestion d'Agenda ! #\n"
             "#############################################################################\n");
 
+    //Gestion du menu
     while(!quit){
 
         printf("\nChoisissez ce que vous voulez faire :\n"
@@ -43,6 +48,7 @@ int main(int argc, char **argv){
             "\nVeuillez indiquer votre choix en tapant le numéro associé sur votre clavier : "
             );
 
+        //Lecture de la réponse de l'utilisateur
         scanf("%d%*c",&answer);
 
         switch (answer)
@@ -57,7 +63,7 @@ int main(int argc, char **argv){
                     displayWeeksList(d);
                 }
                 else{
-                    printf("Impossible car aucun fichier n'a été renseigné.\n\n");
+                    printf("Initialisation impossible car aucun fichier n'a été renseigné.\n\n");
                 }
                 break;
             case 2:
@@ -104,7 +110,9 @@ int main(int argc, char **argv){
                 scanf("%d%*c", &hour);
                 printf("\nEntrer le nom de l'action: ");
                 fgets(name,ACTION_NAME_SIZE,stdin);
-                //removeBackSlashN(name);
+                printf("action : -%s-\n",name);
+                removeBackSlashN(name);
+                printf("action 2 : -%s-\n",name);
                 printf("\n");
 
                 if (supprWeek(&d,year,week,day,hour,name)){
