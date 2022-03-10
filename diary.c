@@ -364,7 +364,7 @@ void displayWeeksList(Diary d){
         printf("\nAgenda :\n");
 
         while (d != NULL){
-            printf("\tAnnée %s semaine %s :\n",d->year, d->weekNumber);
+            printf("\tAnnée %s semaine %d :\n",d->year, atoi(d->weekNumber));
             displayActionsList(d->actionsList);
             d = d->next;
         }
