@@ -13,7 +13,6 @@
 /*                                                               */
 /* Entrée : s ; chaine de caractères                             */
 /*---------------------------------------------------------------*/
-
 void removeBackSlashN(char *s){
     s[strlen(s) -1] = '\0';
 }
@@ -31,7 +30,6 @@ void removeBackSlashN(char *s){
 /*            i: indice du caractère en cours de lecture dans input */
 /*            j : indice du prochain caractère libre dans output    */
 /*----------------------------------------------------------------- */
-
 void recupString(char *input, char *output, int debut,int fin){
     int j = 0;
     for (int i = debut; i <= fin; i++)

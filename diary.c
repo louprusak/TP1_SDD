@@ -284,7 +284,15 @@ Boolean addWeek(Diary * pd, char * year, char *weekNumber,int dayNumber, int hou
 }
 
 
-//Rechercher un motif et créer une liste des jours qui l'ont
+/* --------------------------------------------------------------------------- */
+/* findPattern      Rechercher un motif et créer une liste des jours qui l'ont */
+/*                                                                             */
+/* En entrée: d pointeur de tête de l'Agenda                                   */
+/*            *ppl pointeur sur la liste des jours avec motifs                 */
+/*            pattern chaine de caractères du motif à rechercher               */
+/*                                                                             */
+/* En sortie: void                                                             */
+/* ----------------------------------------------------------------------------*/
 void findPattern(Diary d, patternList_t *ppl, char *pattern){
     if(d){
         char *result = NULL;
@@ -305,6 +313,7 @@ void findPattern(Diary d, patternList_t *ppl, char *pattern){
     }
     
 } 
+
 
 /* -------------------------------------------------------------------- */
 /* supprFirstWeek  Suppression du premier élément d'une liste           */
@@ -419,6 +428,7 @@ void displayWeeksList(Diary d){
     }
 }
 
+
 /* -------------------------------------------------------------------- */
 /* saveDiary      Sauvegarde de l'Agenda dans un fichier texte          */
 /*                                                                      */
@@ -456,6 +466,7 @@ Boolean saveDiary(Diary d, char *filename){
     }
     return code;
 }
+
 
 /* -------------------------------------------------------------------------- */
 /* freeDiary    Libération de la liste des semaines                           */

@@ -8,7 +8,6 @@
 #ifndef ACTIONS_H
 #define ACTIONS_H
 
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -16,7 +15,6 @@
 /*---------------------------------------------------------------*/
 /* Constantes                                                    */
 /*---------------------------------------------------------------*/
-
 #define ACTION_NAME_SIZE 11
 #define DAY_SIZE 2
 #define HOUR_SIZE 3
@@ -46,7 +44,6 @@ typedef enum {FALSE, TRUE} Boolean;
 /*---------------------------------------------------------------*/
 /* Fonctions                                                     */
 /*---------------------------------------------------------------*/
-
 ActionsList initActions(void);
 Boolean emptyActions(ActionsList l);
 int lengthActions(ActionsList l);

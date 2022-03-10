@@ -29,7 +29,7 @@ int main(int argc, char **argv){
     char pattern[11] = "";
     char filename[FILENAME_SIZE];
 
-    //Message d'entrée dans le programme
+    //Message de bienvenue
     printf("\n#############################################################################\n"
             "# Bonjour et bienvenue sur votre système personnalisé de gestion d'Agenda ! #\n"
             "#############################################################################\n");

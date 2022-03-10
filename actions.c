@@ -14,10 +14,10 @@
 /*                                                                      */
 /* En sortie: NULL                                                      */
 /* -------------------------------------------------------------------- */
-
 ActionsList initActions(void){
     return NULL;
 }
+
 
 /* -------------------------------------------------------------------- */
 /* createAction      Création d'une case action                         */
@@ -27,7 +27,6 @@ ActionsList initActions(void){
 /*                                                                      */
 /* En sortie: tmp une case action                                       */
 /* -------------------------------------------------------------------- */
-
 ActionsList createAction(int day, int hour, char *name){
     ActionsList tmp = (ActionsList) malloc(sizeof(Action_t));
     if (tmp){
@@ -38,6 +37,7 @@ ActionsList createAction(int day, int hour, char *name){
     }
     return tmp;
 }
+
 
 /* --------------------------------------------------------------------------- */
 /* insertFirstAction    Insert en tête d'une action dans la liste des actions  */
@@ -50,7 +50,6 @@ ActionsList createAction(int day, int hour, char *name){
 /*                                                                             */
 /* Variables locales: tmp, case créée à rajouter                               */
 /* --------------------------------------------------------------------------- */
-
 void insertFirstAction(ActionsList *plist, int day, int hour, char * name){
     Action_t *tmp = createAction(day, hour, name);
     if(tmp){
@@ -64,6 +63,7 @@ void insertFirstAction(ActionsList *plist, int day, int hour, char * name){
     }
 }
 
+
 /* -------------------------------------------------------------------------- */
 /* emptyActions    Vérifie si la liste des actions est vide                   */
 /*                                                                            */
@@ -71,7 +71,6 @@ void insertFirstAction(ActionsList *plist, int day, int hour, char * name){
 /*                                                                            */
 /* En sortie: TRUE si la liste est vide, FALSE sinon                          */
 /* -------------------------------------------------------------------------- */
-
 Boolean emptyActions(ActionsList l){
     Boolean code = FALSE;
     if (l == NULL){
@@ -80,6 +79,7 @@ Boolean emptyActions(ActionsList l){
     return code;
 }
 
+
 /* -------------------------------------------------------------------------- */
 /* lengthActions    Connaitre la longueur de la liste                         */
 /*                                                                            */
@@ -87,7 +87,6 @@ Boolean emptyActions(ActionsList l){
 /*                                                                            */
 /* En sortie: la longeur de la liste                                          */
 /* -------------------------------------------------------------------------- */
-
 int lengthActions(ActionsList l){
     int i = 0;
     while(!emptyActions(l)){
@@ -96,6 +95,7 @@ int lengthActions(ActionsList l){
     }
     return i;
 }
+
 
 /* -------------------------------------------------------------------------- */
 /* addAction    Ajout d'une action à la liste                                 */
@@ -111,7 +111,6 @@ int lengthActions(ActionsList l){
 /*            tmp: case à ajouter dans la liste                               */
 /*            code: boléeen qui vérifier si l'ajout est fait ou non           */
 /* -------------------------------------------------------------------------- */
-
 Boolean addAction(ActionsList *plist, int day,int hour, char *name){
     printf("Je passe dans le addAction\n");
 
@@ -189,6 +188,7 @@ Boolean addAction(ActionsList *plist, int day,int hour, char *name){
     return code;
 }
 
+
 /* -------------------------------------------------------------------------- */
 /* supprFirstAction    Suppression du premier élément d'une liste d'action    */
 /*                                                                            */
@@ -198,12 +198,12 @@ Boolean addAction(ActionsList *plist, int day,int hour, char *name){
 /*                                                                            */
 /* Variables locales: curr: l'élément à supprimer                             */
 /* -------------------------------------------------------------------------- */
-
 void supprFirstAction(ActionsList* plist){
     Action_t* curr = *plist;
     *plist=curr->next;
     free(curr);
 }
+
 
 /* -------------------------------------------------------------------------- */
 /* supprAction    Supression d'une action                                     */
@@ -218,8 +218,6 @@ void supprFirstAction(ActionsList* plist){
 /*            prec: pointeur de l'élément précédent celui pointé par curr     */
 /*            code: boléeen qui vérifier si la suppression est faite ou non   */
 /* -------------------------------------------------------------------------- */
-
-
 Boolean supprAction (ActionsList* plist, int day, int hour){
     ActionsList prec = *plist;
     ActionsList curr=prec;
@@ -246,7 +244,6 @@ Boolean supprAction (ActionsList* plist, int day, int hour){
             if (curr->hour==hour){
                 // Cas si l'élément à supprimer est le premier
                 if (curr == *plist){
-                    printf("Cas de l'élément en premier à supprimer\n");
                     supprFirstAction(plist);
                 }
                 // On élimine l'élément après prec
@@ -267,6 +264,7 @@ Boolean supprAction (ActionsList* plist, int day, int hour){
     return code;
 }
 
+
 /* -------------------------------------------------------------------------- */
 /* displayActionsList    Affichage de la liste d'action                       */
 /*                                                                            */
@@ -274,7 +272,6 @@ Boolean supprAction (ActionsList* plist, int day, int hour){
 /*                                                                            */
 /* En sortie: void                                                            */
 /* -------------------------------------------------------------------------- */
-
 void displayActionsList(ActionsList list){
     while (list!= NULL)
     {
@@ -282,6 +279,7 @@ void displayActionsList(ActionsList list){
         list = list->next;
     }
 }
+
 
 /* -------------------------------------------------------------------------- */
 /* freeActionsList    Libération de la liste d'actions                        */
@@ -293,7 +291,6 @@ void displayActionsList(ActionsList list){
 /* Variables locales: curr : pointeur de parcours de liste                    */
 /*            suiv: pointeur de l'élément suivant celui pointé par curr       */
 /* -------------------------------------------------------------------------- */
-
 void freeActionsList (ActionsList list){
     ActionsList curr = list;
     ActionsList suiv = list;
