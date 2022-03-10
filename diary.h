@@ -43,8 +43,6 @@ Diary initDiary(void);
 void initDiaryWithFile(Diary *d, char *fileName);
 Boolean saveDiary(Diary d, char *filename);
 Diary initWeeks(void);
-Boolean emptyDiary(Diary d);
-int lengthDiary(Diary d);
 Diary createWeekWithAction(char * year, char * weekNumber,int day, int hour, char * name);
 void insertFirstWeekWithAction(Diary *d, char * year, char * weekNumber,int day, int hour, char* name);
 void scanWeek(Boolean del,char *year, char *week, int *day, int *hour, char *name);

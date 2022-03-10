@@ -65,39 +65,6 @@ void insertFirstAction(ActionsList *plist, int day, int hour, char * name){
 
 
 /* -------------------------------------------------------------------------- */
-/* emptyActions    Vérifie si la liste des actions est vide                   */
-/*                                                                            */
-/* En entrée: list le pointeur de la tête de la liste de l'agenda             */
-/*                                                                            */
-/* En sortie: TRUE si la liste est vide, FALSE sinon                          */
-/* -------------------------------------------------------------------------- */
-Boolean emptyActions(ActionsList l){
-    Boolean code = FALSE;
-    if (l == NULL){
-        code = TRUE;
-    }
-    return code;
-}
-
-
-/* -------------------------------------------------------------------------- */
-/* lengthActions    Connaitre la longueur de la liste                         */
-/*                                                                            */
-/* En entrée: list le pointeur qui pointe sur la tête de la liste de l'agenda */
-/*                                                                            */
-/* En sortie: la longeur de la liste                                          */
-/* -------------------------------------------------------------------------- */
-int lengthActions(ActionsList l){
-    int i = 0;
-    while(!emptyActions(l)){
-        i++;
-        l = l->next;
-    }
-    return i;
-}
-
-
-/* -------------------------------------------------------------------------- */
 /* addAction    Ajout d'une action à la liste                                 */
 /*                                                                            */
 /* En entrée: plist le pointeur du pointeur tête de la liste des actions      */
@@ -112,7 +79,6 @@ int lengthActions(ActionsList l){
 /*            code: boléeen qui vérifier si l'ajout est fait ou non           */
 /* -------------------------------------------------------------------------- */
 Boolean addAction(ActionsList *plist, int day,int hour, char *name){
-    printf("Je passe dans le addAction\n");
 
     Boolean code = TRUE; // indicateur d'erreur
     

@@ -146,39 +146,6 @@ void insertFirstWeekWithAction(Diary *d, char * year, char *weekNumber,int day, 
 }
 
 
-/* -------------------------------------------------------------------- */
-/* emptyDiary        Savoir si une liste est vide                       */
-/*                                                                      */
-/* En entrée: d le pointeur de tête de l'agenda                         */
-/*                                                                      */
-/* En sortie: TRUE si l'agenda est vide, FALSE sinon                    */
-/* -------------------------------------------------------------------- */
-Boolean emptyDiary(Diary d){
-    Boolean code = FALSE;
-    if (d == NULL){
-        code = TRUE;
-    }
-    return code;
-}
-
-
-/* -------------------------------------------------------------------- */
-/* lengthDiary        Connaitre la longueur de la liste                 */
-/*                                                                      */
-/* En entrée: d le pointeur de tête de l'agenda                         */
-/*                                                                      */
-/* En sortie: la longueur de l'agenda d                                 */
-/* -------------------------------------------------------------------- */
-int lengthDiary(Diary d){
-    int i = 0;
-    while(!emptyDiary(d)){
-        i++;
-        d = d->next;
-    }
-    return i;
-}
-
-
 /* ----------------------------------------------------------------------------------- */
 /* addWeek  Ajout d'une nouvelle action selon l'année, la semaine, le jour et l'heure  */
 /*                                                                                     */
@@ -343,29 +310,24 @@ Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour){
     else {
         Diary curr = *pd;
         Diary prec = curr;
+
         // Déplacement selon l'année
         while (curr!=NULL && strcmp(curr->year,year)<0){
             prec= curr;
             curr=curr->next;
         }
-        //printf("déplacement année : =%s= =%s=\n=%s= =%s=\n",curr->year,curr->weekNumber, year, week);
+
         // Égalité sur l'année
         if (strcmp(curr->year,year)==0){
+
             // Déplacement selon la semaine
-            //printf("égalité dans l'année\n");
             while (curr!=NULL && strcmp(curr->year,year)==0 && strcmp(curr->weekNumber,week)<0 ){
-                //printf("je passe dans le while\n");
                 prec = curr;
-                //printf("le prec ne merde pas\n");
                 curr = curr->next;
             }
-            //printf("fin while après égalité année\n");
-            //int retour = strcmp(curr->weekNumber,week);
-            //printf("%d\n",retour);
-            //printf("%d %d %s\n",day,hour,name);
+
             // Égalité de la semaine et l'action existe dans la liste des actions
             if (strcmp(curr->weekNumber,week) == 0 && supprAction(&(curr->actionsList),day,hour)){
-                //printf("égalité de la semaine\n");
                 if (!curr->actionsList){
                     // La liste des actions est vide alors on supprime la case de l'année et de la semaine
                     if (curr==*pd){
@@ -379,7 +341,6 @@ Boolean supprWeek(Diary * pd, char * year, char * week, int day, int hour){
             // Dans tous les autres cas l'élément n'existe pas
             }
             else {
-                //printf("l'élément n'existe pas\n");
                 code = FALSE;
             }
         }
@@ -448,7 +409,6 @@ Boolean saveDiary(Diary d, char *filename){
     }
     else{
         code = FALSE;
-        printf("Impossible l'agenda est vide.\n");
     }
     return code;
 }

@@ -45,8 +45,6 @@ typedef enum {FALSE, TRUE} Boolean;
 /* Fonctions                                                     */
 /*---------------------------------------------------------------*/
 ActionsList initActions(void);
-Boolean emptyActions(ActionsList l);
-int lengthActions(ActionsList l);
 ActionsList createAction(int day, int hour, char * name);
 void insertFirstAction(ActionsList *d, int day, int hour, char * name);
 Boolean addAction(ActionsList *plist, int day,int hour, char *name);
